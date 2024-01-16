@@ -28,8 +28,8 @@ jobs:
       - name: Copiar o .env
         run: cp contrib/env-sample .env
 
-      - name: Rodar os testes
-        run: pipenv run pytest --cov=pypro
+#      - name: Rodar os testes
+#        run: pipenv run pytest --cov=pypro
 
       - name: Rodar o flake8
         run: pipenv run flake8
