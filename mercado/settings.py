@@ -29,10 +29,12 @@ DEBUG = config('DEBUG', cast=bool)
 
 ALLOWED_HOSTS = ['mercado-alegria.fly.dev/', '127.0.0.1']
 
+AUTH_USER_MODEL = 'base.User'
 
 # Application definition
 
 INSTALLED_APPS = [
+    'mercado.base',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
