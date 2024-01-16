@@ -1,0 +1,46 @@
+name: Pipeline
+on:
+  push:
+    branches:
+      [ 'main' ]
+  pull_request:
+    branches:
+      [ 'main' ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Instalar o Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Copia os arquivos do repositório
+        uses: actions/checkout@v4
+
+      - name: Instalar pipenv
+        run: pip install -q pipenv
+
+      - name: Instalar dependências
+        run: pipenv sync -d
+
+      - name: Copiar o .env
+        run: cp contrib/env-sample .env
+
+      - name: Rodar os testes
+        run: pipenv run pytest --cov=pypro
+
+      - name: Rodar o flake8
+        run: pipenv run flake8
+
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy --remote-only
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
