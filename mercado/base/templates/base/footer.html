@@ -1,0 +1,90 @@
+{% load static %}
+<!-- rodapé 1 -->
+<footer class="main-footer mt-5 pt-4 text-black" style="margin-bottom: 5px">
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-md-3">
+                <h3>Receba nossas ofertas</h3>
+                <span>e novidades por E-mail!</span>
+            </div>
+            <div class="col">
+                <form>
+                    <div class="mb-3">
+                        <input type="email" class="form-control" id="email"
+                               aria-describedby="emailHelp" placeholder="E-mail*">
+                    </div>
+                    <div class="mb-3">
+                        <input type="tel" class="form-control" id="telefone" placeholder="Telefone*">
+                    </div>
+                    <label>Ao clicar em Cadastrar você aceita os <a href="#">termos e condições</a></label>
+                    <br>
+                    <button type="submit" class="btn btn-primary mb-3">Cadastrar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- rodapé 2 -->
+    <div class="second-footer pt-3 pb-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <p><b>Sobre o Comercial Alegria</b></p>
+                    <p style="line-height: 1.7">
+                        <a>Quem somos nós</a>
+                        <br>
+                        <a>Política de Privacidade</a>
+                        <br>
+                        <a>Política de Entrega</a>
+                        <br>
+                        <a>Trocas e Devoluções</a>
+                        <br>
+                        <a>Políticas de Cancelamentos e Ressarcimentos</a>
+                        <br>
+                        <a>Política de Venda, Preços, Ofertas e Promoções</a>
+                    </p>
+                </div>
+                <div class="col-md-3">
+                    <p><b>Entre em Contato</b></p>
+                    <p style="line-height: 1.7">
+                        <a>Central de Atendimento</a>
+                        <br>
+                        <a>Fale Conosco</a>
+                        <br>
+                        <a>Trabalhe Conosco</a>
+                    </p>
+                </div>
+                <div class="col-md-4">
+
+                </div>
+                <div class="col-md-1">
+                    <img src="{% static 'img/usuario_icon.png' %}" style="display: block; margin-left: auto; margin-right: 0"
+                         class="float-right mx-auto" alt="imagem_rodapé">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- rodapé 3 -->
+    <div class="bg-light p-3">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <p><b>Formas de Pagamento</b></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="icons-container">
+                        <img src="{% static 'img/usuario_icon.png' %}" style="margin-right: 10px" alt="imagem_rodapé">
+                        <img src="{% static 'img/usuario_icon_2.png' %}" style="margin-right: 10px" alt="imagem_rodapé">
+                        <img src="{% static 'img/usuario_icon.png' %}" style="margin-right: 10px" alt="imagem_rodapé">
+                        <img src="{% static 'img/usuario_icon_2.png' %}" style="margin-right: 10px" alt="imagem_rodapé">
+                        <img src="{% static 'img/usuario_icon.png' %}" style="margin-right: 10px" alt="imagem_rodapé">
+                        <img src="{% static 'img/usuario_icon_2.png' %}" style="margin-right: 10px" alt="imagem_rodapé">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
