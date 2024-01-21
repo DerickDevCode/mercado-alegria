@@ -21,15 +21,15 @@ def test_title(resp):
 def test_home_link(resp):
     assert_contains(resp, f'href="{reverse("base:home")}"')
 
-# # descomentar quando implementar o favicon definitivo
-# def test_favicon(resp):
-#     assert_contains(resp, 'href="/static/img/usuario_icon"')
-#
+
+def test_favicon(resp):
+    assert_contains(resp, 'href="/static/img/favicon.png"')
+
+
+def test_logo_rodape(resp):
+    assert_contains(resp, 'src="/static/img/banner.png"')
+
 # descomentar quando implementar o link e o botão da página definitivo
 # def test_login_link_e_botao(resp):
 #     assert_contains(resp, 'href="<link da página de cadastro de usuário>"')
 #     assert_contains(resp, 'src="/static/img/usuario_icon_3"')
-#
-# descomentar quando implementar o logo do rodapé definitivo
-# def test_logo_rodape(resp):
-#     assert_contains(resp, 'src="/static/img/usuario_icon"')
