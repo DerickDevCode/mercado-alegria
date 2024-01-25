@@ -52,7 +52,8 @@ class UserAdmin(admin.ModelAdmin):
             {
                 "classes": ("wide",),
                 "fields": (
-                "first_name", "last_name", "email", "password1", "password2", "date_of_birth", "cpf", "phone_number"),
+                    "first_name", "last_name", "email", "password1", "password2", "date_of_birth", "cpf",
+                    "phone_number"),
             },
         ),
     )
