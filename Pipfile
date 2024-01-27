@@ -13,6 +13,7 @@ dj-database-url = "*"
 psycopg2-binary = "*"
 django-extensions = "*"
 sentry-sdk = "*"
+django-debug-toolbar = "*"
 
 [dev-packages]
 flake8 = "*"
