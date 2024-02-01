@@ -1,2 +1,48 @@
 {% extends 'base/base.html' %}
 {% load static %}
+{% block body %}
+<div class="row justify-content-center mt-4">
+    <div class="col-md-10">
+        <div>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Library</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Data</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="row">
+            <div class="img-content col-12 col-lg-6 mt-3">
+                <img src="{% static 'img/1.jpg' %}" class="img-fluid" alt="img">
+            </div>
+            <div class="top-container-left-column col-12 col-lg-6 mt-3">
+                <h5 class="text-muted"><b>{{ produto.nome | default:'(Nome do Produto Não Está Disponível)' }}</b></h5>
+                <div class="row">
+                    <div class="col-md-6">
+                    <span class="text-muted">
+                        <small>
+                            Marca:
+                            <a class="text-reset text-decoration-none" href="#">
+                                {{ produto.marca | default:'(Marca do Produto Não Está Disponível)' }}</a>
+                        </small>
+                    </span>
+                    </div>
+                    <div class="col-md-6">
+                        <span class="text-muted">
+                            <small>
+                                (Código: {{ produto.codigo | default:'(Código do Produto Não Está Disponível)' }})
+                            </small>
+                        </span>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col">
+                        PREÇO DO PRODUTO
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}

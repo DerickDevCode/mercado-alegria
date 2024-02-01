@@ -6,3 +6,5 @@ app_name = 'produtos'
 urlpatterns = [
     path('', produto, name='produto'),
 ]
+
+# formato da url para implementar <slug:departamento>/<slug:categoria>/<slug:produto>
