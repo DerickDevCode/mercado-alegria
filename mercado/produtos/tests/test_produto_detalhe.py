@@ -11,13 +11,13 @@ def departamento(db):
 
 
 @pytest.fixture
-def categoria(departamento, db):
+def categoria(departamento):
     return baker.make(Categoria, departamento=departamento)
 
 
 @pytest.fixture
-def produto(categoria, db):
-    return baker.make(Produto, categoria=categoria)
+def produto(categoria):
+    return baker.make(Produto, categoria=categoria, imagem='mediafiles/imagens_produtos/arroz-bernardo.jpg')
 
 
 @pytest.fixture

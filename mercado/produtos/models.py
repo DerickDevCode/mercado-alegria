@@ -17,7 +17,9 @@ class Produto(models.Model):
         return self.nome
 
     def get_absolute_url(self):
-        return reverse('produtos:produto', args=(self.slug,))
+        return reverse('produtos:produto', args=(self.categoria.departamento.slug,
+                                                 self.categoria.slug,
+                                                 self.slug,))
 
 
 class Categoria(models.Model):

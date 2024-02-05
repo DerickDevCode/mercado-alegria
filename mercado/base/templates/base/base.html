@@ -50,12 +50,16 @@
                                 <a class="nav-link dropdown-toggle text-light" href="#" role="button"
                                    data-bs-toggle="dropdown"
                                    aria-expanded="false">
-                                    <b>Dropdown link</b>
+                                    <b>Produtos</b>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Produtos</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                    {% for produto in PRODUTOS %}
+                                    <li>
+                                        <a class="dropdown-item" href="{{ produto.get_absolute_url }}">
+                                            {{ produto.nome }}
+                                        </a>
+                                    </li>
+                                    {% endfor %}
                                 </ul>
                             </li>
                             <li class="nav-item" style="margin-right: 10px; margin-left: 10px">
