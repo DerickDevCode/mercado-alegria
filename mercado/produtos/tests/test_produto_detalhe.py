@@ -23,7 +23,8 @@ def produto(categoria, db):
 @pytest.fixture
 def resp(client, departamento, categoria, produto):
     resp = client.get(reverse('produtos:produto',
-                              kwargs={'departamento': departamento.slug, 'categoria': categoria.slug,
+                              kwargs={'departamento': produto.categoria.departamento.slug,
+                                      'categoria': produto.categoria.slug,
                                       'slug': produto.slug}))
     return resp
 
