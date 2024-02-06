@@ -39,7 +39,7 @@ def test_nome_produto(resp, produto):
     assert_contains(resp, f'<h5 class="mt-3"><b>{produto.nome}</b></h5>')
 
 
-def test_marca_produto(resp, produto):
+def test_marca_produto(resp, produto):  # Lembrar de adicionar o teste para o link da página da marca do Produto
     assert_contains(resp, f'<a class="text-reset text-decoration-none" href="#">{produto.marca}</a>')
 
 
@@ -53,3 +53,15 @@ def test_preco_produto(resp, produto):
 
 def test_descricao_produto(resp, produto):
     assert_contains(resp, f'<h6>{produto.descricao}</h6>')
+
+
+def test_guia_de_pagina_departamento(resp, produto):  # Lembrar de adicionar o teste para o link do Departamento
+    assert_contains(resp, f'<li class="breadcrumb-item"><a href="#">{produto.categoria.departamento.nome}</a></li>')
+
+
+def test_guia_de_pagina_categoria(resp, produto):  # Lembrar de adicionar o teste para o link da Categoria
+    assert_contains(resp, f'<li class="breadcrumb-item"><a href="#">{produto.categoria.nome}</a></li>')
+
+
+def test_guia_de_pagina_produto(resp, produto):  # Lembrar de adicionar o teste para o link do Produto
+    assert_contains(resp, f'<li class="breadcrumb-item active" aria-current="page">{produto.nome}</li>')
