@@ -24,10 +24,10 @@
             </div>
 
             <!-- primeira NavBar com icones e pesquisa -->
-            <nav class="navbar bg-body-tertiary" style="margin-top: 5px; margin-bottom: 5px">
+            <nav class="navbar bg-body-tertiary">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="{% url 'base:home' %}">
-                        <img src="{% static 'img/banner.png' %}" alt="Bootstrap" width="140" height="35">
+                        <img src="{% static 'img/banner.png' %}" alt="Bootstrap" width="140" height="40">
                     </a>
                     <form class="d-flex" role="search">
                         <input class="form-control me-3" type="search" placeholder="Pesquisar" aria-label="Search">
@@ -83,7 +83,7 @@
             </nav>
         </div>
     </header>
-    <div class="mt-5" style="height: 125px"></div>
+    <div class="mt-5" style="height: 120px"></div>
 
     {% block body %}{% endblock body %}
 </div>
