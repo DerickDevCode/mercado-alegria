@@ -14,10 +14,13 @@
         </div>
         <div class="row">
             <div class="img-content col-12 col-lg-6 mt-3">
-                <img src="{{ produto.imagem.url }}" class="img-fluid" alt="{{produto.nome}}">
+                <span class="ratio ratio-1x1">
+                <img src="{{ produto.imagem.url }}" class="img-fluid " style="object-fit: contain"
+                     alt="{{produto.nome}}">
+                </span>
             </div>
             <div class="top-container-left-column col-12 col-lg-6 mt-3">
-                <h3 class="mt-3"><b>{{ produto.nome | default:'(Nome do Produto Não Está Disponível)' }}</b></h3>
+                <h4 class="mt-3"><b>{{ produto.nome | default:'(Nome do Produto Não Está Disponível)' }}</b></h4>
                 <div class="row">
                     <div class="col-md-6">
                     <span class="">
