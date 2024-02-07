@@ -36,7 +36,7 @@ def test_status_code(resp):
 
 
 def test_nome_produto(resp, produto):
-    assert_contains(resp, f'<h5 class="mt-3"><b>{produto.nome}</b></h5>')
+    assert_contains(resp, f'<h4 class="mt-3"><b>{produto.nome}</b></h4>')
 
 
 def test_marca_produto(resp, produto):  # Lembrar de adicionar o teste para o link da página da marca do Produto
