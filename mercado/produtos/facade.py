@@ -26,3 +26,11 @@ def buscar_departamento_da_categoria(slug):
     :return: retorna o departamento da categoria referente a um produto
     """
     return Produto.objects.get(slug=slug).categoria.departamento.slug
+
+
+def listar_produtos_por_marca(marca):
+    """
+    Lista todos os produtos de uma determinada marca
+    :return: retorna uma lista com os produtos de uma determinada marca ordenados pelo slug
+    """
+    return list(Produto.objects.filter(marca__iexact=marca))
