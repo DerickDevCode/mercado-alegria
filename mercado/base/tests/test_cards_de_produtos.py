@@ -28,6 +28,10 @@ def resp(client, produtos):
     return resp
 
 
+def test_statuc_code(resp):
+    assert resp.status_code == 200
+
+
 def test_imagem_produto(resp, produtos):
     for produto in produtos:
         assert_contains(resp, f'src="{produto.imagem.url}"')
