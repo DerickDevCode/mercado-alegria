@@ -35,6 +35,10 @@ def test_status_code(resp):
     assert resp.status_code == 200
 
 
+def test_imagem_produto(resp, produto):
+    assert_contains(resp, f'src="{produto.imagem.url}"')
+
+
 def test_nome_produto(resp, produto):
     assert_contains(resp, f'<h4 class="mt-3"><b>{produto.nome}</b></h4>')
 
