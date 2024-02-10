@@ -9,3 +9,13 @@
 .second-footer{
     background-color: #D96C00;
 }
+
+.row.margem-carrossel{
+    margin-top: 0px;
+}
+
+@media (max-width: 642px) {
+  .row.margem-carrossel{
+    margin-top: 62px;
+  }
+}
