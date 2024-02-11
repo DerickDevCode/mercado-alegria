@@ -6,7 +6,7 @@
         <div>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">{{ produto.categoria.departamento.nome }}</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'produtos:pagina_de_departamentos' departamento %}">{{ produto.categoria.departamento.nome }}</a></li>
                     <li class="breadcrumb-item"><a href="#">{{ produto.categoria.nome }}</a></li>
                     <li class="breadcrumb-item active" aria-current="page">{{ produto.nome }}</li>
                 </ol>
@@ -26,19 +26,28 @@
                     <span class="">
                         <small>
                             Marca:
-                            <a class="text-reset text-decoration-none" href="#">{{ produto.marca | default:'(Marca do Produto Não Está Disponível)' }}</a>
+                            <a class="text-reset text-decoration-none"
+                               href="{% url 'produtos:pagina_de_marcas' marca %}">
+                                {{ produto.marca | default:'(Marca do Produto Não Está Disponível)' }}
+                            </a>
                         </small>
                     </span>
                     </div>
                     <div class="col-md-6">
                         <span class="">
-                            <small>(Código: {{ produto.codigo | default:'(Código do Produto Não Está Disponível)' }})</small>
+                            <small>
+                                (Código: {{ produto.codigo | default:'(Código do Produto Não Está Disponível)' }})
+                            </small>
                         </span>
                     </div>
                 </div>
                 <div class="row mt-5">
                     <div class="col">
-                        <h2 class="text-success"><b>R$ {{ produto.preco | default:'(Preço do Produto Não Está Disponível)' }}</b></h2>
+                        <h2 class="text-success">
+                            <b>
+                                R$ {{ produto.preco | default:'(Preço do Produto Não Está Disponível)' }}
+                            </b>
+                        </h2>
                         <button type="button" class="btn btn-success col-12 mt-4">Adicionar ao carrinho</button>
                     </div>
                     <div style="border-bottom: 2px solid #888; border-top: 1px solid #888; margin: 20px">
