@@ -1,5 +1,6 @@
 import pytest
 from django.urls import reverse
+from django.utils.text import slugify
 from model_bakery import baker
 
 from mercado.base.django_assertions import assert_contains
@@ -43,24 +44,45 @@ def test_nome_produto(resp, produto):
     assert_contains(resp, f'<h4 class="mt-3"><b>{produto.nome}</b></h4>')
 
 
-def test_marca_produto(resp, produto):  # Lembrar de adicionar o teste para o link da página da marca do Produto
-    assert_contains(resp, f'<a class="text-reset text-decoration-none" href="#">{produto.marca}</a>')
+def test_marca_produto(resp, produto):
+    assert_contains(resp, f'''<a class="text-reset text-decoration-none"
+                               href="{reverse('produtos:pagina_de_marcas', args=(slugify(produto.marca),))}">
+                                {produto.marca}
+                            </a>''')
+
+
+def test_link_para_pagina_de_marca_dos_produtos(resp, produto):
+    assert_contains(resp,
+                    f'''href="{reverse("produtos:pagina_de_marcas",
+                                       kwargs={"marca": slugify(produto.marca)})}">''')
 
 
 def test_codigo_produto(resp, produto):
-    assert_contains(resp, f'<small>(Código: {produto.codigo})</small>')
+    assert_contains(resp, f'''small>
+                                (Código: {produto.codigo})
+                            </small>''')
 
 
 def test_preco_produto(resp, produto):
-    assert_contains(resp, f'<h2 class="text-success"><b>R$ {str(produto.preco).replace(".", ",")}</b></h2>')
+    assert_contains(resp, f'''<b>
+                                R$ {str(produto.preco).replace(".", ",")}
+                            </b>''')
 
 
 def test_descricao_produto(resp, produto):
     assert_contains(resp, f'<h6>{produto.descricao}</h6>')
 
 
-def test_guia_de_pagina_departamento(resp, produto):  # Lembrar de adicionar o teste para o link do Departamento
-    assert_contains(resp, f'<li class="breadcrumb-item"><a href="#">{produto.categoria.departamento.nome}</a></li>')
+def test_guia_de_pagina_departamento(resp, produto):
+    assert_contains(resp,
+                    f'">{produto.categoria.departamento.nome}</a></li>')
+
+
+def test_link_da_guia_para_pagina_de_departamento_dos_produto(resp, produto):
+    assert_contains(resp,
+                    f'''<li class="breadcrumb-item"><a href="{reverse("produtos:pagina_de_departamentos",
+                                                                      args=(produto.categoria.departamento.slug,))}">'''
+                    )
 
 
 def test_guia_de_pagina_categoria(resp, produto):  # Lembrar de adicionar o teste para o link da Categoria

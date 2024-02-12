@@ -28,7 +28,7 @@ def resp(client, produtos):
     return resp
 
 
-def test_statuc_code(resp):
+def test_status_code(resp):
     assert resp.status_code == 200
 
 
