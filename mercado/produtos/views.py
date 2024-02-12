@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.utils.text import slugify
 
 from mercado.produtos import facade
 
