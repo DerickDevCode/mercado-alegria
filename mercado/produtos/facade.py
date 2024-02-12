@@ -33,7 +33,7 @@ def listar_produtos_por_marca(marca):
     Lista todos os produtos de uma determinada marca
     :return: retorna uma lista com os produtos de uma determinada marca ordenados pelo slug
     """
-    return list(Produto.objects.filter(marca__iexact=marca).order_by('slug'))
+    return list(Produto.objects.filter(marca=marca).order_by('slug'))
 
 
 def listar_produtos_por_departamento(departamento):
