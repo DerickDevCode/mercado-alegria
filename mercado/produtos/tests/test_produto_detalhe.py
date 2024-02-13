@@ -1,6 +1,5 @@
 import pytest
 from django.urls import reverse
-from django.utils.text import slugify
 from model_bakery import baker
 
 from mercado.base.django_assertions import assert_contains
@@ -80,14 +79,20 @@ def test_guia_de_pagina_departamento(resp, produto):
 
 def test_link_da_guia_para_pagina_de_departamento_dos_produto(resp, produto):
     assert_contains(resp,
-                    f'''<li class="breadcrumb-item"><a href="{reverse("produtos:pagina_de_departamentos",
-                                                                      args=(produto.categoria.departamento.slug,))}">'''
+                    f'''<li class="breadcrumb-item"><a href="{produto.categoria.departamento.get_absolute_url()}">'''
                     )
 
 
-def test_guia_de_pagina_categoria(resp, produto):  # Lembrar de adicionar o teste para o link da Categoria
-    assert_contains(resp, f'<li class="breadcrumb-item"><a href="#">{produto.categoria.nome}</a></li>')
+def test_guia_de_pagina_categoria(resp, produto):
+    assert_contains(resp, f'''>
+                        {produto.categoria.nome}</a></li>''')
 
 
-def test_guia_de_pagina_produto(resp, produto):  # Lembrar de adicionar o teste para o link do Produto
+def test_link_da_guia_para_pagina_de_categoria_dos_produto(resp, produto):
+    assert_contains(resp,
+                    f'''<li class="breadcrumb-item"><a href="{produto.categoria.get_absolute_url()}">'''
+                    )
+
+
+def test_guia_de_pagina_produto(resp, produto):
     assert_contains(resp, f'<li class="breadcrumb-item active" aria-current="page">{produto.nome}</li>')
