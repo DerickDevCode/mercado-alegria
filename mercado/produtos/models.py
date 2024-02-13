@@ -31,6 +31,9 @@ class Categoria(models.Model):
     def __str__(self):
         return self.nome
 
+    def get_absolute_url(self):
+        return reverse('produtos:pagina_de_categorias', args=(self.departamento.slug, self.slug))
+
 
 class Departamento(models.Model):
     nome = models.CharField(max_length=32)
@@ -39,3 +42,6 @@ class Departamento(models.Model):
 
     def __str__(self):
         return self.nome
+
+    def get_absolute_url(self):
+        return reverse('produtos:pagina_de_departamentos', args=(self.slug,))
