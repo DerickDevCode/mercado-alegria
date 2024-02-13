@@ -6,8 +6,9 @@
         <div>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{% url 'produtos:pagina_de_departamentos' departamento %}">{{ produto.categoria.departamento.nome }}</a></li>
-                    <li class="breadcrumb-item"><a href="#">{{ produto.categoria.nome }}</a></li>
+                    <li class="breadcrumb-item"><a href="{{ produto.categoria.departamento.get_absolute_url }}">
+                        {{ produto.categoria.departamento.nome }}</a></li>
+                    <li class="breadcrumb-item"><a href="{{ produto.categoria.get_absolute_url }}">{{ produto.categoria.nome }}</a></li>
                     <li class="breadcrumb-item active" aria-current="page">{{ produto.nome }}</li>
                 </ol>
             </nav>

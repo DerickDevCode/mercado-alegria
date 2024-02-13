@@ -42,3 +42,11 @@ def listar_produtos_por_departamento(departamento):
     :return: retorna uma lista com os produtos de um determinado departamento ordenados pelo slug
     """
     return list(Produto.objects.filter(categoria__departamento__slug__iexact=departamento).order_by('slug'))
+
+
+def listar_produtos_por_categoria(categoria):
+    """
+    Lista todos os produtos de uma determinada categoria
+    :return: retorna uma lista com os produtos de uma determinada categoria ordenados pelo slug
+    """
+    return list(Produto.objects.filter(categoria__slug__iexact=categoria).order_by('slug'))

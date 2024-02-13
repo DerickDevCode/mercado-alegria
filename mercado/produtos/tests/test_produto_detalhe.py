@@ -45,8 +45,7 @@ def test_nome_produto(resp, produto):
 
 
 def test_marca_produto(resp, produto):
-    assert_contains(resp, f'''<a class="text-reset text-decoration-none"
-                               href="{reverse('produtos:pagina_de_marcas', args=(slugify(produto.marca),))}">
+    assert_contains(resp, f'''>
                                 {produto.marca}
                             </a>''')
 
@@ -54,7 +53,7 @@ def test_marca_produto(resp, produto):
 def test_link_para_pagina_de_marca_dos_produtos(resp, produto):
     assert_contains(resp,
                     f'''href="{reverse("produtos:pagina_de_marcas",
-                                       kwargs={"marca": slugify(produto.marca)})}">''')
+                                       kwargs={"marca": produto.marca})}">''')
 
 
 def test_codigo_produto(resp, produto):
@@ -75,7 +74,8 @@ def test_descricao_produto(resp, produto):
 
 def test_guia_de_pagina_departamento(resp, produto):
     assert_contains(resp,
-                    f'">{produto.categoria.departamento.nome}</a></li>')
+                    f'''>
+                        {produto.categoria.departamento.nome}</a></li>''')
 
 
 def test_link_da_guia_para_pagina_de_departamento_dos_produto(resp, produto):

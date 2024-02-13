@@ -23,3 +23,10 @@ def pagina_de_departamentos(request, departamento):
     departamento = produtos[0].categoria.departamento.nome
     return render(request, 'produtos/produtos_por_departamento.html',
                   context={'produtos': produtos, 'departamento': departamento})
+
+
+def pagina_de_categorias(request, departamento, categoria):
+    produtos = facade.listar_produtos_por_categoria(categoria)
+    categoria = produtos[0].categoria.nome
+    return render(request, 'produtos/produtos_por_categoria.html',
+                  context={'produtos': produtos, 'categoria': categoria})
