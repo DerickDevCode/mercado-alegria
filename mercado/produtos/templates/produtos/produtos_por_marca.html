@@ -12,8 +12,8 @@
     </div>
 
     {% for produto in produtos %}
-    <div class="col-md-2">
-        <div class="card text-center">
+    <div class="col-md-2 my-2">
+        <div class="card border-0 text-center" style="box-shadow: 0 0 5px rgba(0, 0, 0, 0.3)">
             <a class="text-decoration-none ratio ratio-1x1" href="{{ produto.get_absolute_url }}">
                 <img src="{{ produto.imagem.url }}" class="card-img-top" style="object-fit: contain" alt="teste">
             </a>
