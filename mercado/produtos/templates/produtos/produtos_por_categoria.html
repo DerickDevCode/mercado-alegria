@@ -3,23 +3,21 @@
 {% block body %}
 
 <!-- produtos -->
-<div class="text-center text-muted mt-5 mb-5">
+<div class="text-center text-muted mt-4 mb-4">
     <h2><b>{{ categoria }}</b></h2>
 </div>
 
 <div class="row" style="margin-top: 10px">
-    <div class="col-md-4">
-    </div>
 
     {% for produto in produtos %}
-    <div class="col-md-2">
-        <div class="card text-center">
+    <div class="col-md-2 my-2">
+        <div class="card border-0 text-center" style="box-shadow: 0 0 5px rgba(0, 0, 0, 0.3)">
             <a class="text-decoration-none ratio ratio-1x1" href="{{ produto.get_absolute_url }}">
                 <img src="{{ produto.imagem.url }}" class="card-img-top" style="object-fit: contain" alt="teste">
             </a>
             <div class="card-body">
                 <div>
-                    <div style="height: 80px">
+                    <div style="height: 100px">
                         <a class="text-decoration-none" href="{{ produto.get_absolute_url }}">
                             <p class="card-text text-muted">{{ produto.nome }}</p></a>
                     </div>
@@ -30,6 +28,7 @@
         </div>
     </div>
     {% endfor %}
+
 </div>
 
 {% endblock body %}

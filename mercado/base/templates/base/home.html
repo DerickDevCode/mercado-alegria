@@ -5,13 +5,13 @@
 {% include 'base/carrossel.html' %}
 
 <!-- divs dos produtos -->
-<div class="alert alert-light text-center bg-warning">
-    <strong>Produtos</strong>
+<div class="text-muted text-center my-3">
+    <h5><b>Ofertas da Semana</b></h5>
 </div>
 <div class="row" style="margin-top: 10px">
     {% for produto in PRODUTOS|slice:':6' %}
-    <div class="col-md-2">
-        <div class="card text-center">
+    <div class="col-md-2 my-2">
+        <div class="card border-0 text-center" style="box-shadow: 0 0 5px rgba(0, 0, 0, 0.3)">
             <a class="text-decoration-none ratio ratio-1x1" href="{{ produto.get_absolute_url }}">
                 <img src="{{ produto.imagem.url }}" class="card-img-top" style="object-fit: contain" alt="teste">
             </a>
@@ -23,7 +23,9 @@
                     </div>
                 </div>
                 <h5 class="card-title text-success"><b>R$ {{ produto.preco }}</b></h5>
-                <a href="#" class="btn btn-warning">Adicionar ao carrinho</a>
+                <button type="button" class="btn btn-warning">
+                    Adicionar ao carrinho
+                </button>
             </div>
         </div>
     </div>
@@ -38,13 +40,13 @@
 </div>
 
 <!-- divs dos produtos 2 -->
-<div class="alert alert-light text-center bg-warning">
-    <strong>Produtos 2</strong>
+<div class="text-muted text-center mb-3">
+    <h5><b>Mais Vendidos</b></h5>
 </div>
 <div class="row" style="margin-top: 10px">
     {% for produto in PRODUTOS|slice:'6:12' %}
-    <div class="col-md-2">
-        <div class="card text-center">
+    <div class="col-md-2 my-2">
+        <div class="card border-0 text-center" style="box-shadow: 0 0 5px rgba(0, 0, 0, 0.3)">
             <a class="text-decoration-none ratio ratio-1x1" href="{{ produto.get_absolute_url }}">
                 <img src="{{ produto.imagem.url }}" class="card-img-top" style="object-fit: contain" alt="teste">
             </a>
@@ -56,7 +58,9 @@
                     </div>
                 </div>
                 <h5 class="card-title text-success"><b>R$ {{ produto.preco }}</b></h5>
-                <a href="#" class="btn btn-warning">Adicionar ao carrinho</a>
+                <button type="button" class="btn btn-warning">
+                    Adicionar ao carrinho
+                </button>
             </div>
         </div>
     </div>
@@ -66,13 +70,13 @@
 {% include 'base/carrossel_duplo.html' %}
 
 <!-- divs dos produtos 3 - final -->
-<div class="alert alert-light text-center bg-warning">
-    <strong>Produtos 2</strong>
+<div class="text-muted text-center my-3">
+    <h5><b>Volte a Comprar</b></h5>
 </div>
 <div class="row" style="margin-top: 10px; margin-bottom: 30px">
     {% for produto in PRODUTOS|slice:'12:18' %}
-    <div class="col-md-2">
-        <div class="card text-center">
+    <div class="col-md-2 my-2">
+        <div class="card border-0 text-center" style="box-shadow: 0 0 5px rgba(0, 0, 0, 0.3)">
             <a class="text-decoration-none ratio ratio-1x1" href="{{ produto.get_absolute_url }}">
                 <img src="{{ produto.imagem.url }}" class="card-img-top" style="object-fit: contain" alt="teste">
             </a>
@@ -84,7 +88,9 @@
                     </div>
                 </div>
                 <h5 class="card-title text-success"><b>R$ {{ produto.preco }}</b></h5>
-                <a href="#" class="btn btn-warning">Adicionar ao carrinho</a>
+                <button type="button" class="btn btn-warning">
+                    Adicionar ao carrinho
+                </button>
             </div>
         </div>
     </div>
