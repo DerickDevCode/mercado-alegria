@@ -16,7 +16,7 @@ def buscar_categoria_do_produto(slug):
     :param slug: recebe o slug do produto
     :return: retorna a categoria do produto referente ao slug
     """
-    return Produto.objects.get(slug=slug).categoria.slug
+    return Produto.objects.get(slug=slug).subcategoria.categoria.slug
 
 
 def buscar_departamento_da_categoria(slug):
@@ -25,7 +25,7 @@ def buscar_departamento_da_categoria(slug):
     :param slug: recebe o slug do produto
     :return: retorna o departamento da categoria referente a um produto
     """
-    return Produto.objects.get(slug=slug).categoria.departamento.slug
+    return Produto.objects.get(slug=slug).subcategoria.categoria.departamento.slug
 
 
 def listar_produtos_por_marca(marca):
@@ -41,7 +41,7 @@ def listar_produtos_por_departamento(departamento):
     Lista todos os produtos de um determinado departamento
     :return: retorna uma lista com os produtos de um determinado departamento ordenados pelo slug
     """
-    return list(Produto.objects.filter(categoria__departamento__slug__iexact=departamento).order_by('slug'))
+    return list(Produto.objects.filter(subcategoria__categoria__departamento__slug__iexact=departamento).order_by('slug'))
 
 
 def listar_produtos_por_categoria(categoria):
@@ -49,4 +49,4 @@ def listar_produtos_por_categoria(categoria):
     Lista todos os produtos de uma determinada categoria
     :return: retorna uma lista com os produtos de uma determinada categoria ordenados pelo slug
     """
-    return list(Produto.objects.filter(categoria__slug__iexact=categoria).order_by('slug'))
+    return list(Produto.objects.filter(subcategoria__categoria__slug__iexact=categoria).order_by('slug'))
