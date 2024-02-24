@@ -32,6 +32,7 @@ def resp(client, departamento, categoria, produto):
     resp = client.get(reverse('produtos:produto',
                               kwargs={'departamento': produto.subcategoria.categoria.departamento.slug,
                                       'categoria': produto.subcategoria.categoria.slug,
+                                      'subcategoria': produto.subcategoria.slug,
                                       'slug': produto.slug}))
     return resp
 
@@ -99,5 +100,12 @@ def test_link_da_guia_para_pagina_de_categoria_dos_produto(resp, produto):
                     )
 
 
-def test_guia_de_pagina_produto(resp, produto):
-    assert_contains(resp, f'<li class="breadcrumb-item active" aria-current="page">{produto.nome}</li>')
+def test_guia_de_pagina_subcategoria(resp, produto):
+    assert_contains(resp, f'''>
+                        {produto.subcategoria.nome}</a></li>''')
+
+
+def test_link_da_guia_para_pagina_de_subcategoria_dos_produto(resp, produto):
+    assert_contains(resp,
+                    f'''<li class="breadcrumb-item"><a href="{produto.subcategoria.get_absolute_url()}">'''
+                    )
