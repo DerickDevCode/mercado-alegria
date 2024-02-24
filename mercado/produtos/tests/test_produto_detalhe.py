@@ -3,7 +3,7 @@ from django.urls import reverse
 from model_bakery import baker
 
 from mercado.base.django_assertions import assert_contains
-from mercado.produtos.models import Departamento, Categoria, Produto
+from mercado.produtos.models import Departamento, Categoria, Produto, Subcategoria
 
 
 @pytest.fixture
@@ -17,16 +17,22 @@ def categoria(departamento):
 
 
 @pytest.fixture
-def produto(categoria):
-    return baker.make(Produto, categoria=categoria, preco=20.75, descricao='texto aleatório para testes',
+def subcategoria(categoria):
+    return baker.make(Subcategoria, categoria=categoria)
+
+
+@pytest.fixture
+def produto(subcategoria):
+    return baker.make(Produto, subcategoria=subcategoria, preco=20.75, descricao='texto aleatório para testes',
                       imagem='mediafiles/imagens_produtos/arroz-bernardo.jpg')
 
 
 @pytest.fixture
 def resp(client, departamento, categoria, produto):
     resp = client.get(reverse('produtos:produto',
-                              kwargs={'departamento': produto.categoria.departamento.slug,
-                                      'categoria': produto.categoria.slug,
+                              kwargs={'departamento': produto.subcategoria.categoria.departamento.slug,
+                                      'categoria': produto.subcategoria.categoria.slug,
+                                      'subcategoria': produto.subcategoria.slug,
                                       'slug': produto.slug}))
     return resp
 
@@ -74,25 +80,33 @@ def test_descricao_produto(resp, produto):
 def test_guia_de_pagina_departamento(resp, produto):
     assert_contains(resp,
                     f'''>
-                        {produto.categoria.departamento.nome}</a></li>''')
+                        {produto.subcategoria.categoria.departamento.nome}</a></li>''')
 
 
 def test_link_da_guia_para_pagina_de_departamento_dos_produto(resp, produto):
     assert_contains(resp,
-                    f'''<li class="breadcrumb-item"><a href="{produto.categoria.departamento.get_absolute_url()}">'''
+                    f'''<li class="breadcrumb-item"><a href="{
+                    produto.subcategoria.categoria.departamento.get_absolute_url()}">'''
                     )
 
 
 def test_guia_de_pagina_categoria(resp, produto):
     assert_contains(resp, f'''>
-                        {produto.categoria.nome}</a></li>''')
+                        {produto.subcategoria.categoria.nome}</a></li>''')
 
 
 def test_link_da_guia_para_pagina_de_categoria_dos_produto(resp, produto):
     assert_contains(resp,
-                    f'''<li class="breadcrumb-item"><a href="{produto.categoria.get_absolute_url()}">'''
+                    f'''<li class="breadcrumb-item"><a href="{produto.subcategoria.categoria.get_absolute_url()}">'''
                     )
 
 
-def test_guia_de_pagina_produto(resp, produto):
-    assert_contains(resp, f'<li class="breadcrumb-item active" aria-current="page">{produto.nome}</li>')
+def test_guia_de_pagina_subcategoria(resp, produto):
+    assert_contains(resp, f'''>
+                        {produto.subcategoria.nome}</a></li>''')
+
+
+def test_link_da_guia_para_pagina_de_subcategoria_dos_produto(resp, produto):
+    assert_contains(resp,
+                    f'''<li class="breadcrumb-item"><a href="{produto.subcategoria.get_absolute_url()}">'''
+                    )

@@ -30,8 +30,9 @@ def produto(subcategoria):
 @pytest.fixture
 def resp(client, produto):
     resp = client.get(
-        reverse('produtos:pagina_de_departamentos',
-                kwargs={'departamento': produto.subcategoria.categoria.departamento.slug}))
+        reverse('produtos:pagina_de_subcategorias',
+                kwargs={'departamento': produto.subcategoria.categoria.departamento.slug,
+                        'categoria': produto.subcategoria.categoria.slug, 'subcategoria': produto.subcategoria.slug}))
     return resp
 
 

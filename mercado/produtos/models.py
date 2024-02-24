@@ -10,6 +10,22 @@ class Produto(models.Model):
     preco = models.DecimalField(max_digits=10, decimal_places=2)
     imagem = models.ImageField(upload_to='imagens_produtos/')
     descricao = models.TextField(null=True)
+    subcategoria = models.ForeignKey('Subcategoria', on_delete=models.PROTECT, null=True)
+    data_criacao = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.nome
+
+    def get_absolute_url(self):
+        return reverse('produtos:produto', args=(self.subcategoria.categoria.departamento.slug,
+                                                 self.subcategoria.categoria.slug,
+                                                 self.subcategoria.slug,
+                                                 self.slug,))
+
+
+class Subcategoria(models.Model):
+    nome = models.CharField(max_length=32)
+    slug = models.SlugField(unique=True)
     categoria = models.ForeignKey('Categoria', on_delete=models.PROTECT)
     data_criacao = models.DateTimeField(auto_now_add=True)
 
@@ -17,9 +33,8 @@ class Produto(models.Model):
         return self.nome
 
     def get_absolute_url(self):
-        return reverse('produtos:produto', args=(self.categoria.departamento.slug,
-                                                 self.categoria.slug,
-                                                 self.slug,))
+        return reverse('produtos:pagina_de_subcategorias',
+                       args=(self.categoria.departamento.slug, self.categoria.slug, self.slug))
 
 
 class Categoria(models.Model):
