@@ -85,7 +85,8 @@ def test_guia_de_pagina_departamento(resp, produto):
 
 def test_link_da_guia_para_pagina_de_departamento_dos_produto(resp, produto):
     assert_contains(resp,
-                    f'''<li class="breadcrumb-item"><a href="{produto.subcategoria.categoria.departamento.get_absolute_url()}">'''
+                    f'''<li class="breadcrumb-item"><a href="{
+                    produto.subcategoria.categoria.departamento.get_absolute_url()}">'''
                     )
 
 
