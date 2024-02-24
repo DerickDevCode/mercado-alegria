@@ -3,7 +3,7 @@ from django.urls import reverse
 from model_bakery import baker
 
 from mercado.base.django_assertions import assert_contains
-from mercado.produtos.models import Departamento, Categoria, Produto
+from mercado.produtos.models import Departamento, Categoria, Produto, Subcategoria
 
 
 @pytest.fixture
@@ -17,8 +17,13 @@ def categoria(departamento):
 
 
 @pytest.fixture
-def produto(categoria):
-    return baker.make(Produto, categoria=categoria, preco=20.75, descricao='texto aleatório para testes',
+def subcategoria(categoria):
+    return baker.make(Subcategoria, categoria=categoria)
+
+
+@pytest.fixture
+def produto(subcategoria):
+    return baker.make(Produto, subcategoria=subcategoria, preco=20.75, descricao='texto aleatório para testes',
                       imagem='mediafiles/imagens_produtos/arroz-bernardo.jpg')
 
 
@@ -26,7 +31,8 @@ def produto(categoria):
 def resp(client, produto):
     resp = client.get(
         reverse('produtos:pagina_de_categorias',
-                kwargs={'departamento': produto.categoria.departamento.slug, 'categoria': produto.categoria.slug}))
+                kwargs={'departamento': produto.subcategoria.categoria.departamento.slug,
+                        'categoria': produto.subcategoria.categoria.slug}))
     return resp
 
 
