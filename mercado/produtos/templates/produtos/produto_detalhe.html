@@ -10,7 +10,8 @@
                         {{ produto.subcategoria.categoria.departamento.nome }}</a></li>
                     <li class="breadcrumb-item"><a href="{{ produto.subcategoria.categoria.get_absolute_url }}">
                         {{ produto.subcategoria.categoria.nome }}</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">{{ produto.nome }}</li>
+                    <li class="breadcrumb-item"><a href="{{ produto.subcategoria.get_absolute_url }}">
+                        {{ produto.subcategoria.nome }}</a></li>
                 </ol>
             </nav>
         </div>
