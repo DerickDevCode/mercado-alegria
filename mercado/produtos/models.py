@@ -19,6 +19,7 @@ class Produto(models.Model):
     def get_absolute_url(self):
         return reverse('produtos:produto', args=(self.subcategoria.categoria.departamento.slug,
                                                  self.subcategoria.categoria.slug,
+                                                 self.subcategoria.slug,
                                                  self.slug,))
 
 
@@ -30,6 +31,10 @@ class Subcategoria(models.Model):
 
     def __str__(self):
         return self.nome
+
+    def get_absolute_url(self):
+        return reverse('produtos:pagina_de_subcategorias',
+                       args=(self.categoria.departamento.slug, self.categoria.slug, self.slug))
 
 
 class Categoria(models.Model):
