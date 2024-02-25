@@ -72,6 +72,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'mercado.produtos.context_processors.listar_produtos_ordenados',
+                'mercado.produtos.context_processors.listar_departamentos_ordenados',
             ],
         },
     },

@@ -70,13 +70,14 @@
                                     <a class="nav-link dropdown-toggle text-light" href="#" role="button"
                                        data-bs-toggle="dropdown"
                                        aria-expanded="false">
-                                        <b>Produtos</b>
+                                        <b>Departamentos</b>
                                     </a>
-                                    <ul class="dropdown-menu">
-                                        {% for produto in PRODUTOS %}
+                                    <ul class="dropdown-menu"
+                                        style="max-height: 70vh; overflow-y: scroll; z-index: -1; padding-top: 30px; padding-bottom: 30px">
+                                        {% for departamento in DEPARTAMENTOS %}
                                         <li>
-                                            <a class="dropdown-item" href="{{ produto.get_absolute_url }}">
-                                                {{ produto.nome }}
+                                            <a class="dropdown-item" href="{{ departamento.get_absolute_url }}">
+                                                {{ departamento.nome }}
                                             </a>
                                         </li>
                                         {% endfor %}
