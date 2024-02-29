@@ -20,6 +20,10 @@
   }
 }
 
+.dropdown .dropdown-menu{
+    display: none;
+}
+
 .dropdown:hover > .dropdown-menu, .dropend:hover > .dropdown-menu{
     display: block;
     margin-top: .125em;
@@ -29,4 +33,6 @@
     position: absolute;
     top: 0;
     left: 100%;
+    margin-left: .125em;
 }
+em

@@ -77,15 +77,25 @@
                                         style="max-height: 70vh; z-index: -1; padding-top: 30px; padding-bottom: 30px">
                                         {% for departamento in DEPARTAMENTOS %}
                                         <li class="dropend">
-                                            <a class="dropdown-item dropdown-toggle" href="{{ departamento.get_absolute_url }}">
+                                            <a class="dropdown-item dropdown-toggle"
+                                               href="{{ departamento.get_absolute_url }}">
                                                 {{ departamento.nome }}
                                             </a>
                                             <ul class="dropdown-menu">
-                                                <li>
+                                                <li class="dropend">
                                                     {% for categoria in departamento.categoria_set.all %}
-                                                    <a class="dropdown-item" href="#">
+                                                    <a class="dropdown-item dropdown-toggle" href="#">
                                                         {{ categoria.nome }}
                                                     </a>
+                                                    <ul class="dropdown-menu">
+                                                        <li class="dropend">
+                                                            {% for subcategoria in categoria.subcategoria_set.all %}
+                                                            <a class="dropdown-item dropdown-toggle" href="#">
+                                                                {{ subcategoria.nome }}
+                                                            </a>
+                                                            {% endfor %}
+                                                        </li>
+                                                    </ul>
                                                     {% endfor %}
                                                 </li>
                                             </ul>
