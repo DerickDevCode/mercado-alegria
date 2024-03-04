@@ -84,13 +84,13 @@
                                             <ul class="dropdown-menu">
                                                 {% for categoria in departamento.categoria_set.all %}
                                                 <li class="dropend">
-                                                    <a class="dropdown-item dropdown-toggle" href="#">
+                                                    <a class="dropdown-item dropdown-toggle" href="{{ categoria.get_absolute_url }}">
                                                         {{ categoria.nome }}
                                                     </a>
                                                     <ul class="dropdown-menu">
                                                         {% for subcategoria in categoria.subcategoria_set.all %}
                                                         <li>
-                                                            <a class="dropdown-item" href="#">
+                                                            <a class="dropdown-item" href="{{ subcategoria.get_absolute_url }}">
                                                                 {{ subcategoria.nome }}
                                                             </a>
                                                         </li>
