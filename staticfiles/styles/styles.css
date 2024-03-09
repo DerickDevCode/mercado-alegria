@@ -19,3 +19,18 @@
     margin-top: 62px;
   }
 }
+
+.dropdown .dropdown-menu{
+    display: none;
+}
+
+.dropdown:hover > .dropdown-menu, .dropend:hover > .dropdown-menu{
+    display: block;
+    margin-top: .125em;
+}
+
+.dropend:hover > .dropdown-menu{
+    position: absolute;
+    top: 0;
+    left: 100%;
+}
