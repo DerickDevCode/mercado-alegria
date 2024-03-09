@@ -31,21 +31,7 @@ def resp(client, departamentos, categorias, subcategorias):
 
 def test_exibicao_de_departamentos(resp, departamentos):
     for departamento in departamentos:
-        assert_contains(resp, f'''<a class="dropdown-item dropdown-toggle"
+        assert_contains(resp, f'''<a class="dropdown-item"
                                                href="{departamento.get_absolute_url()}">
                                                 {departamento.nome}
                                             </a>''')
-
-
-def test_exibicao_de_categorias(resp, categorias):
-    for categoria in categorias:
-        assert_contains(resp, f'''<a class="dropdown-item dropdown-toggle" href="{categoria.get_absolute_url()}">
-                                                        {categoria.nome}
-                                                    </a>''')
-
-
-def test_exibicao_de_subcategorias(resp, subcategorias):
-    for subcategoria in subcategorias:
-        assert_contains(resp, f'''<a class="dropdown-item" href="{subcategoria.get_absolute_url()}">
-                                                                {subcategoria.nome}
-                                                            </a>''')

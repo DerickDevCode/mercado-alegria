@@ -74,31 +74,13 @@
                                         <b>Departamentos</b>
                                     </a>
                                     <ul class="dropdown-menu"
-                                        style="max-height: 70vh; z-index: -1; padding-top: 30px; padding-bottom: 30px">
+                                        style="max-height: 70vh; overflow-y: auto; z-index: -1; padding-top: 30px; padding-bottom: 30px">
                                         {% for departamento in DEPARTAMENTOS %}
-                                        <li class="dropend">
-                                            <a class="dropdown-item dropdown-toggle"
+                                        <li class="">
+                                            <a class="dropdown-item"
                                                href="{{ departamento.get_absolute_url }}">
                                                 {{ departamento.nome }}
                                             </a>
-                                            <ul class="dropdown-menu">
-                                                {% for categoria in departamento.categoria_set.all %}
-                                                <li class="dropend">
-                                                    <a class="dropdown-item dropdown-toggle" href="{{ categoria.get_absolute_url }}">
-                                                        {{ categoria.nome }}
-                                                    </a>
-                                                    <ul class="dropdown-menu">
-                                                        {% for subcategoria in categoria.subcategoria_set.all %}
-                                                        <li>
-                                                            <a class="dropdown-item" href="{{ subcategoria.get_absolute_url }}">
-                                                                {{ subcategoria.nome }}
-                                                            </a>
-                                                        </li>
-                                                        {% endfor %}
-                                                    </ul>
-                                                    {% endfor %}
-                                                </li>
-                                            </ul>
                                         </li>
                                         {% endfor %}
                                     </ul>
