@@ -53,13 +53,28 @@
 
                     <div class="offcanvas offcanvas-start d-lg-none" data-bs-scroll="true" tabindex="-1"
                          id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
-                        <div class="offcanvas-header">
-                            <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Título não disponível</h5>
+                        <div class="offcanvas-header main-footer">
+                            <h5 class="offcanvas-tittle">
+                                <img src="{% static 'img/usuario_icon_3.png' %}"
+                                     alt="Bootstrap" width="30" height="24" style="margin-right: 10px">Entre ou crie sua conta</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
                                     aria-label="Close"></button>
                         </div>
                         <div class="offcanvas-body">
-                            <h6>Funcionalidade em desenvolvimento.</h6>
+                            <div>
+                                <h5 class="text-center text-muted">Departamentos</h5>
+                            </div>
+                            <div style="height: 2px; background-color: #E6C12E; margin: 10px 0"></div>
+                            <ul>
+                                {% for departamento in DEPARTAMENTOS %}
+                                <li style="list-style-type: none; margin-top: 5px">
+                                    <a class="dropdown-item"
+                                       href="{{ departamento.get_absolute_url }}">
+                                        {{ departamento.nome }}
+                                    </a>
+                                </li>
+                                {% endfor %}
+                            </ul>
                         </div>
                     </div>
 
