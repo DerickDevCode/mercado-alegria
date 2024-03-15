@@ -35,3 +35,5 @@ def test_exibicao_de_departamentos_menu_sanduiche(resp, departamentos):
                                        href="{departamento.get_absolute_url()}">
                                         {departamento.nome}
                                     </a>''')
+
+# Adicionar testes para os links no header do offcanvas
