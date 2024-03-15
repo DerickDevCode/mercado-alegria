@@ -29,9 +29,11 @@ def resp(client, departamentos, categorias, subcategorias):
     return resp
 
 
-def test_exibicao_de_departamentos_menu_dropdown(resp, departamentos):
+def test_exibicao_de_departamentos_menu_sanduiche(resp, departamentos):
     for departamento in departamentos:
         assert_contains(resp, f'''<a class="dropdown-item"
-                                               href="{departamento.get_absolute_url()}">
-                                                {departamento.nome}
-                                            </a>''')
+                                       href="{departamento.get_absolute_url()}">
+                                        {departamento.nome}
+                                    </a>''')
+
+# Adicionar testes para os links no header do offcanvas
