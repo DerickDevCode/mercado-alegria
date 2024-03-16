@@ -39,3 +39,10 @@ def pagina_de_marcas(request, marca):
     produtos = facade.listar_produtos_por_marca(marca)
     return render(request, 'produtos/produtos_por_marca.html',
                   context={'produtos': produtos, 'marca': marca})
+
+
+def pagina_de_pesquisa(request):
+    query = request.GET.get('search')
+    produtos = facade.filtrar_produtos_pela_pesquisa(query)
+    return render(request, 'produtos/produtos_por_pesquisa.html',
+                  context={'produtos': produtos})

@@ -68,3 +68,11 @@ def listar_produtos_por_subcategoria(subcategoria):
     :return: retorna uma lista com os produtos de uma determinada subcategoria ordenados pelo slug
     """
     return list(Produto.objects.filter(subcategoria__slug__iexact=subcategoria).order_by('slug'))
+
+
+def filtrar_produtos_pela_pesquisa(query):
+    """
+    Lista todos os produtos resultantes de uma pesquisa na barra de pesquisa
+    :return: retorna uma lista com os produtos filtrados pela pesquisa
+    """
+    return Produto.objects.filter(nome__icontains=query)

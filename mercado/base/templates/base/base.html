@@ -29,8 +29,8 @@
                     <a class="navbar-brand" href="{% url 'base:home' %}">
                         <img src="{% static 'img/banner.png' %}" alt="Bootstrap" width="140" height="40">
                     </a>
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-3" type="search" placeholder="Pesquisar" aria-label="Search">
+                    <form class="d-flex" role="search" action="{% url 'produtos:pagina_de_pesquisa' %}">
+                        <input class="form-control me-3" value="{{ request.GET.search }}" name="search" type="search" placeholder="O que você procura?" autocomplete="off">
                         <button class="btn btn-outline-success me-3" type="submit">Pesquisar</button>
                         <div class="ml-auto">
                             <a class="navbar-brand" href="#">
