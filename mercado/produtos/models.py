@@ -1,4 +1,6 @@
+from django.contrib.auth import get_user_model
 from django.db import models
+from django.db.models import CASCADE
 from django.urls import reverse
 
 
@@ -60,3 +62,18 @@ class Departamento(models.Model):
 
     def get_absolute_url(self):
         return reverse('produtos:pagina_de_departamentos', args=(self.slug,))
+
+
+class Carrinho(models.Model):
+    user = models.ForeignKey(get_user_model(), on_delete=CASCADE)
+    produtos = models.ManyToManyField(Produto, through='CarrinhoItem')
+
+    def __str__(self):
+        produtos = [item.nome for item in self.produtos.all()]
+        return f'{self.user.id}: ({produtos})'
+
+
+class CarrinhoItem(models.Model):
+    produto = models.ForeignKey(Produto, on_delete=CASCADE)
+    carrinho = models.ForeignKey(Carrinho, on_delete=CASCADE)
+    quantidade = models.PositiveSmallIntegerField(default=1)
