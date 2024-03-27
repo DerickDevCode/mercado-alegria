@@ -1,6 +1,6 @@
 from django.contrib.admin import ModelAdmin, register
 
-from mercado.produtos.models import Categoria, Departamento, Produto, Subcategoria
+from mercado.produtos.models import Categoria, Departamento, Produto, Subcategoria, Carrinho
 
 
 @register(Produto)
@@ -32,3 +32,7 @@ class DepartamentoAdmin(ModelAdmin):
     list_display = ('nome', 'data_criacao')
     prepopulated_fields = {'slug': ('nome',)}
     ordering = ['nome']
+
+@register(Carrinho)
+class CarrinhoAdmin(ModelAdmin):
+    pass

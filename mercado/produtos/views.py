@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
 from mercado.produtos import facade
+from mercado.produtos.models import Carrinho, Produto, CarrinhoItem
 
 
 def produto(request, departamento, categoria, subcategoria, slug):
@@ -46,3 +47,45 @@ def pagina_de_pesquisa(request):
     produtos = facade.filtrar_produtos_pela_pesquisa(query)
     return render(request, 'produtos/produtos_por_pesquisa.html',
                   context={'produtos': produtos})
+
+
+def carrinho(request):
+    carrinho = Carrinho.objects.filter(user=request.user).first()
+    if not carrinho:
+        carrinho = Carrinho.objects.create(user=request.user)
+
+    return render(request, 'produtos/carrinho.html', context={'carrinho': carrinho})
+
+
+def adicionar_ao_carrinho(request, produto_id: int):
+    carrinho = Carrinho.objects.filter(user=request.user).first()
+    if not carrinho:
+        carrinho = Carrinho.objects.create(user=request.user)
+
+    produto = Produto.objects.get(id=produto_id)
+
+    try:
+        item = CarrinhoItem.objects.get(produto=produto)
+        item.quantidade += 1
+        item.save()
+    except:
+        novo_item = CarrinhoItem(produto=produto, carrinho=carrinho)
+        novo_item.save()
+    return render(request, 'produtos/carrinho.html', context={'carrinho': carrinho})
+
+
+def remover_do_carrinho(request, produto_id: int):
+    carrinho = Carrinho.objects.filter(user=request.user).first()
+    if not carrinho:
+        carrinho = Carrinho.objects.create(user=request.user)
+
+    produto = Produto.objects.get(id=produto_id)
+    try:
+        item = CarrinhoItem.objects.get(produto=produto)
+        item.quantidade -= 1
+        item.save()
+        if item.quantidade <= 0:
+            item.delete()
+    except:
+        return render(request, 'produtos/carrinho.html', context={'carrinho': carrinho})
+    return render(request, 'produtos/carrinho.html', context={'carrinho': carrinho})

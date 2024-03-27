@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Botão Carrinho</title>
+    <!-- Inclua o link para os ícones do Font Awesome (opcional) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Estilos adicionais para o botão */
+        .cart-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Botão Carrinho -->
+<button class="cart-button"><i class="fas fa-shopping-cart"></i> Carrinho</button>
+
+<!-- Adicione o link para o Font Awesome (opcional) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+</body>
+</html>
+
+{% for item in carrinho.produtos.all %}
+<p>{{ item.nome }}
+    <a class="btn btn-warning" href="{% url 'produtos:remover_do_carrinho' produto_id=item.id %}">
+        remover do carrinho
+    </a></p>
+{% endfor %}
