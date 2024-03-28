@@ -1,37 +1,97 @@
-<!DOCTYPE html>
-<html lang="br">
+{% extends 'base/base.html' %}
+{% load static %}
+{% block body %}
+
+<!doctype html>
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Botão Carrinho</title>
-    <!-- Inclua o link para os ícones do Font Awesome (opcional) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        /* Estilos adicionais para o botão */
-        .cart-button {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-    </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Comercial Alegria</title>
+    <link href="{% static 'styles/styles.css' %}" rel="stylesheet">
+    <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
 </head>
 <body>
+<div class="container-fluid">
+    <div style="height: 20px"></div>
+    <div class="content">
+        <section>
+            <table width="100%">
+                <thead>
+                <tr style="border-bottom: 3px solid #ccc">
+                    <th style="text-align: left; padding-bottom: 10px; color: #666">PRODUTO</th>
+                    <th style="text-align: left; padding-bottom: 10px; color: #666">PREÇO</th>
+                    <th style="text-align: left; padding-bottom: 10px; color: #666">QUANTIDADE</th>
+                    <th style="text-align: left; padding-bottom: 10px; color: #666">TOTAL</th>
+                    <th style="text-align: left; padding-bottom: 10px; color: #666">-</th>
+                </tr>
+                </thead>
 
-<!-- Botão Carrinho -->
-<button class="cart-button"><i class="fas fa-shopping-cart"></i> Carrinho</button>
+                <tbody>
+                <tr style="border-bottom: 3px solid #ccc">
+                    <td style="padding: 30px">
+                        <div style="display: flex; align-items: center;">
+                            <img src="https://picsum.photos/150/150" style="border-radius: 4px">
+                            <div style="margin-left: 20px">
+                                <div style="font-size: 20px; margin-bottom: 10px">Nome do Produto</div>
+                                <div style="color: #666">Outra Informação do Produto</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td style="padding: 30px">R$120,00</td>
+                    <td style="padding: 30px">
+                        <div class="qt-button">
+                            <button class="custom-button" style="margin-right: 8px">-</button>
+                            <span>2</span>
+                            <button class="custom-button" style="margin-left: 8px">+</button>
+                        </div>
+                    </td>
+                    <td style="padding: 30px">R$240,00</td>
+                    <td style="padding: 30px">
+                        <button class="custom-button">x</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
 
-<!-- Adicione o link para o Font Awesome (opcional) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+        <!-- Resumo da Compra -->
+        <aside>
+            <div class="box">
+                <header style="padding: 15px 20px; font-size: 18px; border-bottom: 1px solid #ccc">RESUMO DA COMPRA
+                </header>
+                <div style="padding: 20px">
+                    <div style="margin-bottom: 8px; display: flex; justify-content: space-between; color: #111"><span>Sub-Total</span><span>R$240,00</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between"><span>Frete</span><span>Gratis</span>
+                    </div>
+                </div>
+                <footer style="padding: 15px 20px; font-size: 18px; background: #ddd; display: flex; justify-content: space-between">
+                    <span>Total</span>
+                    <span>R$340,00</span>
+                </footer>
+            </div>
+            <button style="background: green; border: 0; color: white; display: block; width: 100%; padding: 15px; letter-spacing: 1px">
+                FINALIZAR COMPRA
+            </button>
+        </aside>
+
+
+        {% for item in carrinho.produtos.all %}
+        <p>
+            {{ item.nome }}
+            <a class="btn btn-warning" href="{% url 'produtos:remover_do_carrinho' produto_id=item.id %}">
+                remover do carrinho
+            </a>
+        </p>
+        {% endfor %}
+    </div>
+</div>
 </body>
 </html>
-
-{% for item in carrinho.produtos.all %}
-<p>{{ item.nome }}
-    <a class="btn btn-warning" href="{% url 'produtos:remover_do_carrinho' produto_id=item.id %}">
-        remover do carrinho
-    </a></p>
-{% endfor %}
+{% endblock body %}

@@ -68,7 +68,7 @@ def adicionar_ao_carrinho(request, produto_id: int):
         item = CarrinhoItem.objects.get(produto=produto)
         item.quantidade += 1
         item.save()
-    except:
+    except Exception:
         novo_item = CarrinhoItem(produto=produto, carrinho=carrinho)
         novo_item.save()
     return render(request, 'produtos/carrinho.html', context={'carrinho': carrinho})
@@ -86,6 +86,6 @@ def remover_do_carrinho(request, produto_id: int):
         item.save()
         if item.quantidade <= 0:
             item.delete()
-    except:
+    except Exception:
         return render(request, 'produtos/carrinho.html', context={'carrinho': carrinho})
     return render(request, 'produtos/carrinho.html', context={'carrinho': carrinho})

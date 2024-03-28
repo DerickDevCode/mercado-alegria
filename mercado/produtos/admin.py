@@ -33,6 +33,7 @@ class DepartamentoAdmin(ModelAdmin):
     prepopulated_fields = {'slug': ('nome',)}
     ordering = ['nome']
 
+
 @register(Carrinho)
 class CarrinhoAdmin(ModelAdmin):
     pass
