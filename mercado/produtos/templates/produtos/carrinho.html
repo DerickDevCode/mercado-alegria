@@ -88,6 +88,9 @@
             <a class="btn btn-warning" href="{% url 'produtos:remover_do_carrinho' produto_id=item.id %}">
                 remover do carrinho
             </a>
+            <a class="btn btn-warning" href="{% url 'produtos:excluir_do_carrinho' produto_id=item.id %}">
+                excluir do carrinho
+            </a>
         </p>
         {% endfor %}
     </div>

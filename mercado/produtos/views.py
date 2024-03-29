@@ -89,3 +89,18 @@ def remover_do_carrinho(request, produto_id: int):
     except Exception:
         return render(request, 'produtos/carrinho.html', context={'carrinho': carrinho})
     return render(request, 'produtos/carrinho.html', context={'carrinho': carrinho})
+
+
+def excluir_do_carrinho(request, produto_id: int):
+    carrinho = facade.buscar_carrinho_existente(request)
+    if not carrinho:
+        carrinho = facade.criar_carrinho(request)
+
+    produto = Produto.objects.get(id=produto_id)
+
+    try:
+        item = facade.buscar_item_do_carrinho(produto)
+        item.delete()
+    except Exception:
+        return render(request, 'produtos/carrinho.html', context={'carrinho': carrinho})
+    return render(request, 'produtos/carrinho.html', context={'carrinho': carrinho})
