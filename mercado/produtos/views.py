@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 from mercado.produtos import facade
-from mercado.produtos.models import Carrinho, Produto, CarrinhoItem
+from mercado.produtos.models import Produto, CarrinhoItem
 
 
 def produto(request, departamento, categoria, subcategoria, slug):
@@ -49,23 +49,22 @@ def pagina_de_pesquisa(request):
                   context={'produtos': produtos})
 
 
-def carrinho(request):
-    carrinho = Carrinho.objects.filter(user=request.user).first()
+def pagina_do_carrinho(request):
+    carrinho = facade.buscar_carrinho_existente(request)
     if not carrinho:
-        carrinho = Carrinho.objects.create(user=request.user)
-
+        carrinho = facade.criar_carrinho(request)
     return render(request, 'produtos/carrinho.html', context={'carrinho': carrinho})
 
 
 def adicionar_ao_carrinho(request, produto_id: int):
-    carrinho = Carrinho.objects.filter(user=request.user).first()
+    carrinho = facade.buscar_carrinho_existente(request)
     if not carrinho:
-        carrinho = Carrinho.objects.create(user=request.user)
+        carrinho = facade.criar_carrinho(request)
 
     produto = Produto.objects.get(id=produto_id)
 
     try:
-        item = CarrinhoItem.objects.get(produto=produto)
+        item = facade.buscar_item_do_carrinho(produto)
         item.quantidade += 1
         item.save()
     except Exception:
@@ -75,13 +74,14 @@ def adicionar_ao_carrinho(request, produto_id: int):
 
 
 def remover_do_carrinho(request, produto_id: int):
-    carrinho = Carrinho.objects.filter(user=request.user).first()
+    carrinho = facade.buscar_carrinho_existente(request)
     if not carrinho:
-        carrinho = Carrinho.objects.create(user=request.user)
+        carrinho = facade.criar_carrinho(request)
 
     produto = Produto.objects.get(id=produto_id)
+
     try:
-        item = CarrinhoItem.objects.get(produto=produto)
+        item = facade.buscar_item_do_carrinho(produto)
         item.quantidade -= 1
         item.save()
         if item.quantidade <= 0:
