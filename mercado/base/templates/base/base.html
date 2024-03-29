@@ -30,19 +30,19 @@
                         <img src="{% static 'img/banner.png' %}" alt="Bootstrap" width="140" height="40">
                     </a>
                     <form class="d-flex" role="search" action="{% url 'produtos:pagina_de_pesquisa' %}">
-                        <input class="form-control me-3" value="{{ request.GET.search }}" name="search" type="search"
+                        <input class="form-control" value="{{ request.GET.search }}" name="search" type="search"
                                placeholder="O que você procura?" autocomplete="off">
-                        <button class="btn btn-outline-success me-3" type="submit">Pesquisar</button>
+                        <button class="btn btn-outline-success me-5" type="submit"><img src="{% static 'img/icone-pesquisa.png' %}" width="30" height="24"></button>
                         <div class="ml-auto">
                             <a class="navbar-brand" href="#">
-                                <img src="{% static 'img/usuario_icon_3.png' %}" alt="Bootstrap" width="30" height="24">
+                                <img src="{% static 'img/usuario_icon_3.png' %}" alt="Bootstrap" width="36" height="30">
                             </a>
 
                         </div>
                         <div>
                             <a class="navbar-brand" href="{% url 'produtos:carrinho' %}">
-                                <img src="{% static 'img/carrinho-de-compras.png' %}" alt="Bootstrap" width="30"
-                                     height="24">
+                                <img src="{% static 'img/carrinho-de-compras.png' %}" alt="Bootstrap" width="36"
+                                     height="30">
                             </a>
                         </div>
                     </form>
