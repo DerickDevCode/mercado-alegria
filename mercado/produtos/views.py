@@ -51,9 +51,10 @@ def pagina_de_pesquisa(request):
 
 def pagina_do_carrinho(request):
     carrinho = facade.buscar_carrinho_existente(request)
+    carrinhoitem = facade.listar_itens_do_carrinho(carrinho)
     if not carrinho:
         carrinho = facade.criar_carrinho(request)
-    return render(request, 'produtos/carrinho.html', context={'carrinho': carrinho})
+    return render(request, 'produtos/carrinho.html', context={'carrinho': carrinho, 'carrinhoitem': carrinhoitem})
 
 
 def adicionar_ao_carrinho(request, produto_id: int):
@@ -70,7 +71,8 @@ def adicionar_ao_carrinho(request, produto_id: int):
     except Exception:
         novo_item = CarrinhoItem(produto=produto, carrinho=carrinho)
         novo_item.save()
-    return render(request, 'produtos/carrinho.html', context={'carrinho': carrinho})
+    carrinhoitem = facade.listar_itens_do_carrinho(carrinho)
+    return render(request, 'produtos/carrinho.html', context={'carrinho': carrinho, 'carrinhoitem': carrinhoitem})
 
 
 def remover_do_carrinho(request, produto_id: int):
@@ -87,8 +89,10 @@ def remover_do_carrinho(request, produto_id: int):
         if item.quantidade <= 0:
             item.delete()
     except Exception:
-        return render(request, 'produtos/carrinho.html', context={'carrinho': carrinho})
-    return render(request, 'produtos/carrinho.html', context={'carrinho': carrinho})
+        carrinhoitem = facade.listar_itens_do_carrinho(carrinho)
+        return render(request, 'produtos/carrinho.html', context={'carrinho': carrinho, 'carrinhoitem': carrinhoitem})
+    carrinhoitem = facade.listar_itens_do_carrinho(carrinho)
+    return render(request, 'produtos/carrinho.html', context={'carrinho': carrinho, 'carrinhoitem': carrinhoitem})
 
 
 def excluir_do_carrinho(request, produto_id: int):
@@ -102,5 +106,7 @@ def excluir_do_carrinho(request, produto_id: int):
         item = facade.buscar_item_do_carrinho(produto)
         item.delete()
     except Exception:
-        return render(request, 'produtos/carrinho.html', context={'carrinho': carrinho})
-    return render(request, 'produtos/carrinho.html', context={'carrinho': carrinho})
+        carrinhoitem = facade.listar_itens_do_carrinho(carrinho)
+        return render(request, 'produtos/carrinho.html', context={'carrinho': carrinho, 'carrinhoitem': carrinhoitem})
+    carrinhoitem = facade.listar_itens_do_carrinho(carrinho)
+    return render(request, 'produtos/carrinho.html', context={'carrinho': carrinho, 'carrinhoitem': carrinhoitem})

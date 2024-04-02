@@ -6,7 +6,8 @@
         <div>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ produto.subcategoria.categoria.departamento.get_absolute_url }}">
+                    <li class="breadcrumb-item"><a
+                            href="{{ produto.subcategoria.categoria.departamento.get_absolute_url }}">
                         {{ produto.subcategoria.categoria.departamento.nome }}</a></li>
                     <li class="breadcrumb-item"><a href="{{ produto.subcategoria.categoria.get_absolute_url }}">
                         {{ produto.subcategoria.categoria.nome }}</a></li>
@@ -51,7 +52,9 @@
                                 R$ {{ produto.preco | default:'(Preço do Produto Não Está Disponível)' }}
                             </b>
                         </h2>
-                        <button type="button" class="btn btn-success col-12 mt-4">Adicionar ao carrinho</button>
+                        <a type="button" class="btn btn-success col-12 mt-4"
+                           href="{% url 'produtos:adicionar_ao_carrinho' produto_id=produto.id %}">Adicionar ao
+                            carrinho</a>
                     </div>
                     <div style="border-bottom: 2px solid #888; border-top: 1px solid #888; margin: 20px">
                         <p class="mt-3" style="margin-bottom: 15px"><img

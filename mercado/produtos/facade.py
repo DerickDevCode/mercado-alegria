@@ -84,7 +84,7 @@ def buscar_carrinho_existente(request):
     :param request: recebe o request
     :return: retorna o carrinho do usuário
     """
-    return Carrinho.objects.filter(user=request.user).first()
+    return Carrinho.objects.get(user=request.user)
 
 
 def criar_carrinho(request):
@@ -103,3 +103,12 @@ def buscar_item_do_carrinho(produto):
     :return: retorna o item(produto) do carrinho
     """
     return CarrinhoItem.objects.get(produto=produto)
+
+
+def listar_itens_do_carrinho(carrinho):
+    """
+    Lista todos os itens do carrinho
+    :param carrinho: recebe o carrinho do usuário
+    :return: retorna uma lista com todos os itens do carrinho
+    """
+    return CarrinhoItem.objects.filter(carrinho=carrinho).order_by('produto')
