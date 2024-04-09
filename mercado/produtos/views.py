@@ -52,9 +52,12 @@ def pagina_de_pesquisa(request):
 def pagina_do_carrinho(request):
     carrinho = facade.buscar_carrinho_existente(request)
     carrinhoitem = facade.listar_itens_do_carrinho(carrinho)
+    total = 0
+    for item in carrinhoitem:
+        total += item.produto.preco * item.quantidade
     if not carrinho:
         carrinho = facade.criar_carrinho(request)
-    return render(request, 'produtos/carrinho.html', context={'carrinho': carrinho, 'carrinhoitem': carrinhoitem})
+    return render(request, 'produtos/carrinho.html', context={'carrinho': carrinho, 'carrinhoitem': carrinhoitem, 'total': total})
 
 
 def adicionar_ao_carrinho(request, produto_id: int):

@@ -55,7 +55,7 @@
                                href="{% url 'produtos:adicionar_ao_carrinho' produto_id=item.produto.id %}">+</a>
                         </div>
                     </td>
-                    <td style="padding: 30px">R$00,00</td>
+                    <td style="padding: 30px">R${{ total }}</td>
                     <td style="padding: 30px">
                         <a class="custom-button" style="text-decoration: none; color: black"
                            href="{% url 'produtos:excluir_do_carrinho' produto_id=item.produto.id %}">x</a>
@@ -72,14 +72,14 @@
                 <header style="padding: 15px 20px; font-size: 18px; border-bottom: 1px solid #ccc">RESUMO DA COMPRA
                 </header>
                 <div style="padding: 20px">
-                    <div style="margin-bottom: 8px; display: flex; justify-content: space-between; color: #111"><span>Sub-Total</span><span>R$240,00</span>
+                    <div style="margin-bottom: 8px; display: flex; justify-content: space-between; color: #111"><span>Sub-Total</span><span>R${{ total }}</span>
                     </div>
                     <div style="display: flex; justify-content: space-between"><span>Frete</span><span>Gratis</span>
                     </div>
                 </div>
                 <footer style="padding: 15px 20px; font-size: 18px; background: #ddd; display: flex; justify-content: space-between">
                     <span>Total</span>
-                    <span>R$340,00</span>
+                    <span>R${{ total }}</span>
                 </footer>
             </div>
             <button style="background: green; border: 0; color: white; display: block; width: 100%; padding: 15px; letter-spacing: 1px">
