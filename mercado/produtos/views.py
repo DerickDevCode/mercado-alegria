@@ -64,8 +64,9 @@ def pagina_do_carrinho(request):
 
 
 def adicionar_ao_carrinho(request, produto_id: int):
-    carrinho = facade.buscar_carrinho_existente(request)
-    if not carrinho:
+    try:
+        carrinho = facade.buscar_carrinho_existente(request)
+    except Exception:
         carrinho = facade.criar_carrinho(request)
 
     produto = Produto.objects.get(id=produto_id)
