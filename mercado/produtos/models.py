@@ -77,3 +77,7 @@ class CarrinhoItem(models.Model):
     produto = models.ForeignKey(Produto, on_delete=CASCADE)
     carrinho = models.ForeignKey(Carrinho, on_delete=CASCADE)
     quantidade = models.PositiveSmallIntegerField(default=1)
+
+    @property
+    def total(self):
+        return self.quantidade * self.produto.preco

@@ -57,7 +57,8 @@ def pagina_do_carrinho(request):
         total += item.produto.preco * item.quantidade
     if not carrinho:
         carrinho = facade.criar_carrinho(request)
-    return render(request, 'produtos/carrinho.html', context={'carrinho': carrinho, 'carrinhoitem': carrinhoitem, 'total': total})
+    return render(request, 'produtos/carrinho.html',
+                  context={'carrinho': carrinho, 'carrinhoitem': carrinhoitem, 'total': total})
 
 
 def adicionar_ao_carrinho(request, produto_id: int):
@@ -75,7 +76,11 @@ def adicionar_ao_carrinho(request, produto_id: int):
         novo_item = CarrinhoItem(produto=produto, carrinho=carrinho)
         novo_item.save()
     carrinhoitem = facade.listar_itens_do_carrinho(carrinho)
-    return render(request, 'produtos/carrinho.html', context={'carrinho': carrinho, 'carrinhoitem': carrinhoitem})
+    total = 0
+    for item in carrinhoitem:
+        total += item.produto.preco * item.quantidade
+    return render(request, 'produtos/carrinho.html',
+                  context={'carrinho': carrinho, 'carrinhoitem': carrinhoitem, 'total': total})
 
 
 def remover_do_carrinho(request, produto_id: int):
@@ -93,9 +98,17 @@ def remover_do_carrinho(request, produto_id: int):
             item.delete()
     except Exception:
         carrinhoitem = facade.listar_itens_do_carrinho(carrinho)
-        return render(request, 'produtos/carrinho.html', context={'carrinho': carrinho, 'carrinhoitem': carrinhoitem})
+        total = 0
+        for item in carrinhoitem:
+            total += item.produto.preco * item.quantidade
+        return render(request, 'produtos/carrinho.html',
+                      context={'carrinho': carrinho, 'carrinhoitem': carrinhoitem, 'total': total})
     carrinhoitem = facade.listar_itens_do_carrinho(carrinho)
-    return render(request, 'produtos/carrinho.html', context={'carrinho': carrinho, 'carrinhoitem': carrinhoitem})
+    total = 0
+    for item in carrinhoitem:
+        total += item.produto.preco * item.quantidade
+    return render(request, 'produtos/carrinho.html',
+                  context={'carrinho': carrinho, 'carrinhoitem': carrinhoitem, 'total': total})
 
 
 def excluir_do_carrinho(request, produto_id: int):
@@ -110,6 +123,14 @@ def excluir_do_carrinho(request, produto_id: int):
         item.delete()
     except Exception:
         carrinhoitem = facade.listar_itens_do_carrinho(carrinho)
-        return render(request, 'produtos/carrinho.html', context={'carrinho': carrinho, 'carrinhoitem': carrinhoitem})
+        total = 0
+        for item in carrinhoitem:
+            total += item.produto.preco * item.quantidade
+        return render(request, 'produtos/carrinho.html',
+                      context={'carrinho': carrinho, 'carrinhoitem': carrinhoitem, 'total': total})
     carrinhoitem = facade.listar_itens_do_carrinho(carrinho)
-    return render(request, 'produtos/carrinho.html', context={'carrinho': carrinho, 'carrinhoitem': carrinhoitem})
+    total = 0
+    for item in carrinhoitem:
+        total += item.produto.preco * item.quantidade
+    return render(request, 'produtos/carrinho.html',
+                  context={'carrinho': carrinho, 'carrinhoitem': carrinhoitem, 'total': total})

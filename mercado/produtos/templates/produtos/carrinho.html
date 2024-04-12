@@ -55,7 +55,7 @@
                                href="{% url 'produtos:adicionar_ao_carrinho' produto_id=item.produto.id %}">+</a>
                         </div>
                     </td>
-                    <td style="padding: 30px">R${{ total }}</td>
+                    <td style="padding: 30px">R${{ item.total }}</td>
                     <td style="padding: 30px">
                         <a class="custom-button" style="text-decoration: none; color: black"
                            href="{% url 'produtos:excluir_do_carrinho' produto_id=item.produto.id %}">x</a>
