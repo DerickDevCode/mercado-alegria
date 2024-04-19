@@ -1,7 +1,7 @@
 from decimal import Decimal
 
 from mercado import settings
-from mercado.produtos.models import Produto, CarrinhoItem
+from mercado.produtos.models import Produto
 
 
 class Carrinho:
