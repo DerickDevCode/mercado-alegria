@@ -53,8 +53,11 @@ def pagina_de_pesquisa(request):
 def pagina_do_carrinho(request):
     carrinho = Carrinho(request)
     produtos_carrinho = carrinho.get_products()
+    total = 0
+    for item in produtos_carrinho:
+        total += item.produto.preco * item.quantidade
     return render(request, 'produtos/carrinho.html',
-                  context={'carrinho': carrinho, 'produtos_carrinho': produtos_carrinho})
+                  context={'carrinho': carrinho, 'produtos_carrinho': produtos_carrinho, 'total': total})
 
 
 def adicionar_ao_carrinho(request, produto_id: int):
@@ -62,8 +65,11 @@ def adicionar_ao_carrinho(request, produto_id: int):
     produto = Produto.objects.get(id=produto_id)
     carrinho.add_product_to_cart(produto)
     produtos_carrinho = carrinho.get_products()
+    total = 0
+    for item in produtos_carrinho:
+        total += item.produto.preco * item.quantidade
     return render(request, 'produtos/carrinho.html',
-                  context={'carrinho': carrinho, 'produtos_carrinho': produtos_carrinho})
+                  context={'carrinho': carrinho, 'produtos_carrinho': produtos_carrinho, 'total': total})
 
 
 def remover_do_carrinho(request, produto_id: int):
@@ -71,8 +77,11 @@ def remover_do_carrinho(request, produto_id: int):
     produto = Produto.objects.get(id=produto_id)
     carrinho.remove_product_from_cart(produto)
     produtos_carrinho = carrinho.get_products()
+    total = 0
+    for item in produtos_carrinho:
+        total += item.produto.preco * item.quantidade
     return render(request, 'produtos/carrinho.html',
-                  context={'carrinho': carrinho, 'produtos_carrinho': produtos_carrinho})
+                  context={'carrinho': carrinho, 'produtos_carrinho': produtos_carrinho, 'total': total})
 
 
 def excluir_do_carrinho(request, produto_id: int):
@@ -80,5 +89,8 @@ def excluir_do_carrinho(request, produto_id: int):
     produto = Produto.objects.get(id=produto_id)
     carrinho.exclude_product_from_cart(produto)
     produtos_carrinho = carrinho.get_products()
+    total = 0
+    for item in produtos_carrinho:
+        total += item.produto.preco * item.quantidade
     return render(request, 'produtos/carrinho.html',
-                  context={'carrinho': carrinho, 'produtos_carrinho': produtos_carrinho})
+                  context={'carrinho': carrinho, 'produtos_carrinho': produtos_carrinho, 'total': total})

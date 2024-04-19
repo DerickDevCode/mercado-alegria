@@ -43,7 +43,7 @@ class Carrinho:
         carrinho = []
         for id, p in produtos:
             produto = Produto.objects.get(id=id)
-            carrinho.append(CarrinhoItem(produto=produto, quantidade=p['quantidade']))
+            carrinho.append(ItemCarrinho(produto=produto, carrinho=self.carrinho, quantidade=p['quantidade']))
         return carrinho
 
     def __len__(self):
@@ -52,3 +52,14 @@ class Carrinho:
     def get_sub_total_price(self):
         return sum(Decimal(item['preco']) * item['quantidade'] for item
                    in self.carrinho.values())
+
+
+class ItemCarrinho:
+    def __init__(self, produto, carrinho, quantidade):
+        self.produto = produto
+        self.carrinho = carrinho
+        self.quantidade = quantidade
+
+    @property
+    def total(self):
+        return self.quantidade * self.produto.preco
