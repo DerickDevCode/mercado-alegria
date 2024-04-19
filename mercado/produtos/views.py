@@ -1,7 +1,8 @@
 from django.shortcuts import render
 
 from mercado.produtos import facade
-from mercado.produtos.models import Produto, CarrinhoItem
+from mercado.produtos.carrinho import Carrinho
+from mercado.produtos.models import Produto
 
 
 def produto(request, departamento, categoria, subcategoria, slug):
@@ -50,90 +51,34 @@ def pagina_de_pesquisa(request):
 
 
 def pagina_do_carrinho(request):
-    try:
-        carrinho = facade.buscar_carrinho_existente(request)
-    except Exception:
-        carrinho = facade.criar_carrinho(request)
-    carrinhoitem = facade.listar_itens_do_carrinho(carrinho)
-    total = 0
-    for item in carrinhoitem:
-        total += item.produto.preco * item.quantidade
-
+    carrinho = Carrinho(request)
+    produtos_carrinho = carrinho.get_products()
     return render(request, 'produtos/carrinho.html',
-                  context={'carrinho': carrinho, 'carrinhoitem': carrinhoitem, 'total': total})
+                  context={'carrinho': carrinho, 'produtos_carrinho': produtos_carrinho})
 
 
 def adicionar_ao_carrinho(request, produto_id: int):
-    try:
-        carrinho = facade.buscar_carrinho_existente(request)
-    except Exception:
-        carrinho = facade.criar_carrinho(request)
-
+    carrinho = Carrinho(request)
     produto = Produto.objects.get(id=produto_id)
-
-    try:
-        item = facade.buscar_item_do_carrinho(produto)
-        item.quantidade += 1
-        item.save()
-    except Exception:
-        novo_item = CarrinhoItem(produto=produto, carrinho=carrinho)
-        novo_item.save()
-    carrinhoitem = facade.listar_itens_do_carrinho(carrinho)
-    total = 0
-    for item in carrinhoitem:
-        total += item.produto.preco * item.quantidade
+    carrinho.add_product_to_cart(produto)
+    produtos_carrinho = carrinho.get_products()
     return render(request, 'produtos/carrinho.html',
-                  context={'carrinho': carrinho, 'carrinhoitem': carrinhoitem, 'total': total})
+                  context={'carrinho': carrinho, 'produtos_carrinho': produtos_carrinho})
 
 
 def remover_do_carrinho(request, produto_id: int):
-    carrinho = facade.buscar_carrinho_existente(request)
-    if not carrinho:
-        carrinho = facade.criar_carrinho(request)
-
+    carrinho = Carrinho(request)
     produto = Produto.objects.get(id=produto_id)
-
-    try:
-        item = facade.buscar_item_do_carrinho(produto)
-        item.quantidade -= 1
-        item.save()
-        if item.quantidade <= 0:
-            item.delete()
-    except Exception:
-        carrinhoitem = facade.listar_itens_do_carrinho(carrinho)
-        total = 0
-        for item in carrinhoitem:
-            total += item.produto.preco * item.quantidade
-        return render(request, 'produtos/carrinho.html',
-                      context={'carrinho': carrinho, 'carrinhoitem': carrinhoitem, 'total': total})
-    carrinhoitem = facade.listar_itens_do_carrinho(carrinho)
-    total = 0
-    for item in carrinhoitem:
-        total += item.produto.preco * item.quantidade
+    carrinho.remove_product_from_cart(produto)
+    produtos_carrinho = carrinho.get_products()
     return render(request, 'produtos/carrinho.html',
-                  context={'carrinho': carrinho, 'carrinhoitem': carrinhoitem, 'total': total})
+                  context={'carrinho': carrinho, 'produtos_carrinho': produtos_carrinho})
 
 
 def excluir_do_carrinho(request, produto_id: int):
-    carrinho = facade.buscar_carrinho_existente(request)
-    if not carrinho:
-        carrinho = facade.criar_carrinho(request)
-
+    carrinho = Carrinho(request)
     produto = Produto.objects.get(id=produto_id)
-
-    try:
-        item = facade.buscar_item_do_carrinho(produto)
-        item.delete()
-    except Exception:
-        carrinhoitem = facade.listar_itens_do_carrinho(carrinho)
-        total = 0
-        for item in carrinhoitem:
-            total += item.produto.preco * item.quantidade
-        return render(request, 'produtos/carrinho.html',
-                      context={'carrinho': carrinho, 'carrinhoitem': carrinhoitem, 'total': total})
-    carrinhoitem = facade.listar_itens_do_carrinho(carrinho)
-    total = 0
-    for item in carrinhoitem:
-        total += item.produto.preco * item.quantidade
+    carrinho.exclude_product_from_cart(produto)
+    produtos_carrinho = carrinho.get_products()
     return render(request, 'produtos/carrinho.html',
-                  context={'carrinho': carrinho, 'carrinhoitem': carrinhoitem, 'total': total})
+                  context={'carrinho': carrinho, 'produtos_carrinho': produtos_carrinho})

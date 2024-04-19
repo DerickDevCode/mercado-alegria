@@ -185,3 +185,6 @@ if SENTRY_DSN:
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# Configurações do Carrinho
+CARRRINHO_SESSION_ID = 'carrinho'

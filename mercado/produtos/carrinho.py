@@ -4,7 +4,7 @@ from mercado import settings
 from mercado.produtos.models import Produto, CarrinhoItem
 
 
-class Carrinho(object):
+class Carrinho:
     def __init__(self, request):
         self.session = request.session
         carrinho = self.session.get(settings.CARRRINHO_SESSION_ID)
@@ -12,7 +12,7 @@ class Carrinho(object):
             carrinho = self.session[settings.CARRRINHO_SESSION_ID] = {}
         self.carrinho = carrinho
 
-    def add(self, produto, quantidade=1):
+    def add_product_to_cart(self, produto, quantidade=1):
         produto_id = str(produto.id)
         if produto_id in self.carrinho:
             self.carrinho[produto_id]['quantidade'] += 1
@@ -20,19 +20,31 @@ class Carrinho(object):
             self.carrinho[produto_id] = {'quantidade': quantidade}
         self.session.modified = True
 
-    def remove(self, produto):
+    def remove_product_from_cart(self, produto):
         produto_id = str(produto.id)
-        if produto_id in self.carrinho:
-            del self.carrinho[produto_id]
+        try:
+            self.carrinho[produto_id]['quantidade'] -= 1
+            if self.carrinho[produto_id]['quantidade'] <= 0:
+                del self.carrinho[produto_id]
+        except Exception:
+            pass
         self.session.modified = True
+
+    def exclude_product_from_cart(self, produto):
+        try:
+            produto_id = str(produto.id)
+            del self.carrinho[produto_id]
+            self.session.modified = True
+        except Exception:
+            pass
 
     def get_products(self):
         produtos = [(key, p) for key, p in self.carrinho.items()]
-        carrinhoitem = []
+        carrinho = []
         for id, p in produtos:
             produto = Produto.objects.get(id=id)
-            carrinhoitem.append(CarrinhoItem(produto=produto, quantidade=p['quantidade']))
-        return carrinhoitem
+            carrinho.append(CarrinhoItem(produto=produto, quantidade=p['quantidade']))
+        return carrinho
 
     def __len__(self):
         return sum(item['quantidade'] for item in self.carrinho.values())
@@ -40,15 +52,3 @@ class Carrinho(object):
     def get_sub_total_price(self):
         return sum(Decimal(item['preco']) * item['quantidade'] for item
                    in self.carrinho.values())
-
-    def clear(self):
-        """
-        Remove all items from the cart.
-        """
-        for key in list(self.carrinho.keys()):  # Use list() para criar uma cópia das chaves
-            del self.carrinho[key]
-        self.session.modified = True
-
-    def save(self):
-        self.session[settings.CARRRINHO_SESSION_ID] = self.carrinho
-        self.session.modified = True
