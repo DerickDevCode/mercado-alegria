@@ -1,4 +1,4 @@
-from mercado.produtos.models import Produto
+from mercado.produtos.models import Produto, Carrinho, CarrinhoItem
 
 
 def buscar_produto(slug):
@@ -76,3 +76,39 @@ def filtrar_produtos_pela_pesquisa(query):
     :return: retorna uma lista com os produtos filtrados pela pesquisa
     """
     return Produto.objects.filter(nome__icontains=query)
+
+
+def buscar_carrinho_existente(request):
+    """
+    Encontra o carrinho respectivo ao usuário do site através das informações do request
+    :param request: recebe o request
+    :return: retorna o carrinho do usuário
+    """
+    return Carrinho.objects.get(user=request.user)
+
+
+def criar_carrinho(request):
+    """
+    Cria um novo carrinho a partir do usuário do site através das informações do request
+    :param request: recebe o request
+    :return: retorna o carrinho do usuário
+    """
+    return Carrinho.objects.create(user=request.user)
+
+
+def buscar_item_do_carrinho(produto):
+    """
+    Encontra o item do carrinho através do produto
+    :param produto: recebe o produto a ser encontrado dentro do carrinho
+    :return: retorna o item(produto) do carrinho
+    """
+    return CarrinhoItem.objects.get(produto=produto)
+
+
+def listar_itens_do_carrinho(carrinho):
+    """
+    Lista todos os itens do carrinho
+    :param carrinho: recebe o carrinho do usuário
+    :return: retorna uma lista com todos os itens do carrinho
+    """
+    return CarrinhoItem.objects.filter(carrinho=carrinho).order_by('produto')

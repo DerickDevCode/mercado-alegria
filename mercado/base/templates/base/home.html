@@ -23,9 +23,9 @@
                     </div>
                 </div>
                 <h5 class="card-title text-success"><b>R$ {{ produto.preco }}</b></h5>
-                <button type="button" class="btn btn-warning">
+                <a class="btn btn-warning" href="{% url 'produtos:adicionar_ao_carrinho' produto_id=produto.id %}">
                     Adicionar ao carrinho
-                </button>
+                </a>
             </div>
         </div>
     </div>
@@ -58,9 +58,9 @@
                     </div>
                 </div>
                 <h5 class="card-title text-success"><b>R$ {{ produto.preco }}</b></h5>
-                <button type="button" class="btn btn-warning">
+                <a class="btn btn-warning" href="{% url 'produtos:adicionar_ao_carrinho' produto_id=produto.id %}">
                     Adicionar ao carrinho
-                </button>
+                </a>
             </div>
         </div>
     </div>
@@ -88,9 +88,9 @@
                     </div>
                 </div>
                 <h5 class="card-title text-success"><b>R$ {{ produto.preco }}</b></h5>
-                <button type="button" class="btn btn-warning">
+                <a class="btn btn-warning" href="{% url 'produtos:adicionar_ao_carrinho' produto_id=produto.id %}">
                     Adicionar ao carrinho
-                </button>
+                </a>
             </div>
         </div>
     </div>

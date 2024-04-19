@@ -34,3 +34,44 @@
     top: 0;
     left: 100%;
 }
+
+.button{
+    cursor: pointer;
+}
+
+.span{
+    padding: 10px;
+}
+
+.custom-button{
+    background: #eee;
+    border: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    padding: 0 20px;
+}
+
+.custom-button:hover{
+    background: #ccc
+}
+
+.qt-button{
+    background: #eee;
+    display: inline-flex;
+    height: 30px;
+    justify-content: space-around;
+    min-width: 60px;
+    align-items: center;
+    border-radius: 20px
+}
+
+.box{
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    background: #eee;
+}

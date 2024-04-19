@@ -1,0 +1,93 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block body %}
+
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Comercial Alegria</title>
+    <link href="{% static 'styles/styles.css' %}" rel="stylesheet">
+    <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container-fluid">
+    <div style="height: 20px"></div>
+    <div class="row">
+        <div class="col">
+            <table width="100%">
+                <thead>
+                <tr style="border-bottom: 3px solid #ccc">
+                    <th style="text-align: left; padding-bottom: 10px; color: #666">PRODUTO</th>
+                    <th style="text-align: left; padding-bottom: 10px; color: #666">PREÇO</th>
+                    <th style="text-align: left; padding-bottom: 10px; color: #666">QUANTIDADE</th>
+                    <th style="text-align: left; padding-bottom: 10px; color: #666">TOTAL</th>
+                    <th style="text-align: left; padding-bottom: 10px; color: #666">EXCLUIR</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                {% for item in produtos_carrinho %}
+                <tr style="border-bottom: 3px solid #ccc">
+                    <td style="padding: 30px">
+                        <div style="display: flex; align-items: center;">
+                            <img src="{{ item.produto.imagem.url }}" width="150" height="150"
+                                 style="border-radius: 4px; object-fit: contain">
+                            <div style="margin-left: 20px">
+                                <div style="font-size: 20px; margin-bottom: 10px">{{ item.produto.nome }}</div>
+                                <div style="color: #666">Marca: {{ item.produto.marca }}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td style="padding: 30px">R${{ item.produto.preco }}</td>
+                    <td style="padding: 30px">
+                        <div class="qt-button">
+                            <a class="custom-button" style="text-decoration: none; color: black; margin-right: 8px"
+                               href="{% url 'produtos:remover_do_carrinho' produto_id=item.produto.id %}">-</a>
+                            <span>{{ item.quantidade }}</span>
+                            <a class="custom-button" style="text-decoration: none; color: black; margin-left: 8px"
+                               href="{% url 'produtos:adicionar_ao_carrinho' produto_id=item.produto.id %}">+</a>
+                        </div>
+                    </td>
+                    <td style="padding: 30px">R${{ item.total }}</td>
+                    <td style="padding: 30px">
+                        <a class="custom-button" style="text-decoration: none; color: black"
+                           href="{% url 'produtos:excluir_do_carrinho' produto_id=item.produto.id %}">x</a>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Resumo da Compra -->
+        <div class="col-4">
+            <div class="box">
+                <header style="padding: 15px 20px; font-size: 18px; border-bottom: 1px solid #ccc">RESUMO DA COMPRA
+                </header>
+                <div style="padding: 20px">
+                    <div style="margin-bottom: 8px; display: flex; justify-content: space-between; color: #111"><span>Sub-Total</span><span>R${{ total }}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between"><span>Frete</span><span>Gratis</span>
+                    </div>
+                </div>
+                <footer style="padding: 15px 20px; font-size: 18px; background: #ddd; display: flex; justify-content: space-between">
+                    <span>Total</span>
+                    <span>R${{ total }}</span>
+                </footer>
+            </div>
+            <button style="background: green; border: 0; color: white; display: block; width: 100%; padding: 15px; letter-spacing: 1px">
+                FINALIZAR COMPRA
+            </button>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+{% endblock body %}

@@ -1,6 +1,8 @@
 from django.shortcuts import render
 
 from mercado.produtos import facade
+from mercado.produtos.carrinho import Carrinho
+from mercado.produtos.models import Produto
 
 
 def produto(request, departamento, categoria, subcategoria, slug):
@@ -46,3 +48,49 @@ def pagina_de_pesquisa(request):
     produtos = facade.filtrar_produtos_pela_pesquisa(query)
     return render(request, 'produtos/produtos_por_pesquisa.html',
                   context={'produtos': produtos})
+
+
+def pagina_do_carrinho(request):
+    carrinho = Carrinho(request)
+    produtos_carrinho = carrinho.get_products()
+    total = 0
+    for item in produtos_carrinho:
+        total += item.produto.preco * item.quantidade
+    return render(request, 'produtos/carrinho.html',
+                  context={'carrinho': carrinho, 'produtos_carrinho': produtos_carrinho, 'total': total})
+
+
+def adicionar_ao_carrinho(request, produto_id: int):
+    carrinho = Carrinho(request)
+    produto = Produto.objects.get(id=produto_id)
+    carrinho.add_product_to_cart(produto)
+    produtos_carrinho = carrinho.get_products()
+    total = 0
+    for item in produtos_carrinho:
+        total += item.produto.preco * item.quantidade
+    return render(request, 'produtos/carrinho.html',
+                  context={'carrinho': carrinho, 'produtos_carrinho': produtos_carrinho, 'total': total})
+
+
+def remover_do_carrinho(request, produto_id: int):
+    carrinho = Carrinho(request)
+    produto = Produto.objects.get(id=produto_id)
+    carrinho.remove_product_from_cart(produto)
+    produtos_carrinho = carrinho.get_products()
+    total = 0
+    for item in produtos_carrinho:
+        total += item.produto.preco * item.quantidade
+    return render(request, 'produtos/carrinho.html',
+                  context={'carrinho': carrinho, 'produtos_carrinho': produtos_carrinho, 'total': total})
+
+
+def excluir_do_carrinho(request, produto_id: int):
+    carrinho = Carrinho(request)
+    produto = Produto.objects.get(id=produto_id)
+    carrinho.exclude_product_from_cart(produto)
+    produtos_carrinho = carrinho.get_products()
+    total = 0
+    for item in produtos_carrinho:
+        total += item.produto.preco * item.quantidade
+    return render(request, 'produtos/carrinho.html',
+                  context={'carrinho': carrinho, 'produtos_carrinho': produtos_carrinho, 'total': total})

@@ -30,11 +30,19 @@
                         <img src="{% static 'img/banner.png' %}" alt="Bootstrap" width="140" height="40">
                     </a>
                     <form class="d-flex" role="search" action="{% url 'produtos:pagina_de_pesquisa' %}">
-                        <input class="form-control me-3" value="{{ request.GET.search }}" name="search" type="search" placeholder="O que você procura?" autocomplete="off">
-                        <button class="btn btn-outline-success me-3" type="submit">Pesquisar</button>
+                        <input class="form-control" value="{{ request.GET.search }}" name="search" type="search"
+                               placeholder="O que você procura?" autocomplete="off">
+                        <button class="btn btn-outline-success me-5" type="submit"><img src="{% static 'img/icone-pesquisa.png' %}" width="30" height="24"></button>
                         <div class="ml-auto">
                             <a class="navbar-brand" href="#">
-                                <img src="{% static 'img/usuario_icon_3.png' %}" alt="Bootstrap" width="30" height="24">
+                                <img src="{% static 'img/usuario_icon_3.png' %}" alt="Bootstrap" width="36" height="30">
+                            </a>
+
+                        </div>
+                        <div>
+                            <a class="navbar-brand" href="{% url 'produtos:pagina_do_carrinho' %}">
+                                <img src="{% static 'img/carrinho-de-compras.png' %}" alt="Bootstrap" width="36"
+                                     height="30">
                             </a>
                         </div>
                     </form>
@@ -56,7 +64,8 @@
                         <div class="offcanvas-header main-footer">
                             <h5 class="offcanvas-tittle">
                                 <img src="{% static 'img/usuario_icon_3.png' %}"
-                                     alt="Bootstrap" width="30" height="24" style="margin-right: 10px">Entre ou crie sua conta</h5>
+                                     alt="Bootstrap" width="30" height="24" style="margin-right: 10px">Entre ou crie sua
+                                conta</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
                                     aria-label="Close"></button>
                         </div>
@@ -86,7 +95,8 @@
                                        role="button"
                                        data-bs-toggle="dropdown"
                                        aria-expanded="false">
-                                        <b>Departamentos</b>
+                                        <b><img src="{% static 'img/icone-menu.png' %}" width="30" height="20"
+                                                style="margin-right: 4px">Departamentos</b>
                                     </a>
                                     <ul class="dropdown-menu"
                                         style="max-height: 70vh; overflow-y: auto; z-index: -1; padding-top: 30px; padding-bottom: 30px">
