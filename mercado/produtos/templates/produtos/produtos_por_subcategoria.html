@@ -23,7 +23,9 @@
                     </div>
                 </div>
                 <h5 class="card-title text-success"><b>R$ {{ produto.preco }}</b></h5>
-                <a href="#" class="btn btn-warning">Adicionar ao carrinho</a>
+                <a class="btn btn-warning" href="{% url 'produtos:adicionar_ao_carrinho' produto_id=produto.id %}">
+                    Adicionar ao carrinho
+                </a>
             </div>
         </div>
     </div>
