@@ -1,5 +1,6 @@
 import pytest
 from django.urls import reverse
+from model_bakery import baker
 
 from mercado.produtos.carrinho import Carrinho
 from mercado.produtos.models import Produto, Departamento, Categoria, Subcategoria
@@ -22,16 +23,14 @@ def subcategoria(categoria):
 
 @pytest.fixture
 def produto1(subcategoria):
-    return Produto.objects.create(nome='Produto1', slug=produto1, marca='teste', codigo=0000, preco=10.50,
-                                  imagem='mediafiles/imagens_produtos/arroz-bernardo.jpg',
-                                  descricao='texto aleatório para testes', subcategoria=subcategoria)
+    return baker.make(Produto, subcategoria=subcategoria, preco=10.50, descricao='texto aleatório para testes',
+                      imagem='mediafiles/imagens_produtos/arroz-bernardo.jpg')
 
 
 @pytest.fixture
 def produto2(subcategoria):
-    return Produto.objects.create(nome='Produto2', slug=produto2, marca='teste', codigo=9999, preco=20.50,
-                                  imagem='mediafiles/imagens_produtos/arroz-bernardo.jpg',
-                                  descricao='texto aleatório para testes', subcategoria=subcategoria)
+    return baker.make(Produto, subcategoria=subcategoria, preco=20.50, descricao='texto aleatório para testes',
+                      imagem='mediafiles/imagens_produtos/arroz-bernardo.jpg')
 
 
 @pytest.fixture
