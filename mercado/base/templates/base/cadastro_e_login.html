@@ -1,0 +1,102 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block body %}
+<div class="row mt-4">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login-tab-pane"
+                        type="button"
+                        role="tab" aria-controls="home-tab-pane" aria-selected="true">Login
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="cadastro-tab" data-bs-toggle="tab" data-bs-target="#cadastro-tab-pane"
+                        type="button"
+                        role="tab" aria-controls="profile-tab-pane" aria-selected="false">Cadastro
+                </button>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="login-tab-pane" role="tabpanel" aria-labelledby="home-tab"
+                 tabindex="0">
+                <h4 class="text-center text-muted mt-4"><b>Já possui uma conta? Faça seu login!</b></h4>
+                <h6 class="text-center text-muted">Veja seus pedidos em andamento, seus produtos favoritos ou finalize
+                    suas compras.
+                </h6>
+                <form class="mt-4 tab-content">
+                    <div class="mb-4">
+                        <input type="email" class="form-control" id="email-login" aria-describedby="emailHelp"
+                               placeholder="Informe seu E-mail ou CPF">
+                    </div>
+                    <div class="mb-4">
+                        <input type="password" class="form-control" id="senha-login" placeholder="Senha">
+                    </div>
+                    <a type="submit" class="btn btn-success col-12 mt-4">Entrar</a>
+                </form>
+            </div>
+            <div class="tab-pane fade" id="cadastro-tab-pane" role="tabpanel" aria-labelledby="profile-tab"
+                 tabindex="0">
+                <h4 class="text-center text-muted mt-4"><b>Comece criando sua conta</b></h4>
+                <h6 class="text-center text-muted">Faça suas compras online com rapidez e praticidade, aproveitando
+                    nossas melhores ofertas
+                </h6>
+                <form class="mt-4 tab-content">
+                    <div class="mb-3">
+                        <small class="text-success"><b>Informações Pessoais</b></small>
+                        <input type="email" class="form-control" id="nome-cadastro" aria-describedby="emailHelp"
+                               placeholder="Nome">
+                    </div>
+                    <div class="mb-3">
+                        <input type="email" class="form-control" id="sobrenome-cadastro" aria-describedby="emailHelp"
+                               placeholder="Sobrenome">
+                    </div>
+                    <div class="mb-3">
+                        <input type="email" class="form-control" id="data-nascimento-cadastro"
+                               aria-describedby="emailHelp"
+                               placeholder="Data de Nascimento">
+                    </div>
+                    <div class="mb-3">
+                        <input type="email" class="form-control" id="cpf-cadastro" aria-describedby="emailHelp"
+                               placeholder="CPF">
+                    </div>
+                    <div class="mb-3">
+                        <input type="email" class="form-control" id="email-cadastro" aria-describedby="emailHelp"
+                               placeholder="E-mail">
+                    </div>
+                    <div class="mb-3">
+                        <input type="email" class="form-control" id="confirmar-email-cadastro"
+                               aria-describedby="emailHelp"
+                               placeholder="Confirmar E-mail">
+                    </div>
+                    <div class="mb-3">
+                        <input type="email" class="form-control" id="telefone-cadastro" aria-describedby="emailHelp"
+                               placeholder="Telefone">
+                    </div>
+                    <div class="mb-3">
+                        <small class="text-success"><b>Senha</b></small>
+                        <input type="email" class="form-control" id="senha-cadastro" aria-describedby="emailHelp"
+                               placeholder="Senha">
+                    </div>
+                    <div class="mb-3">
+                        <input type="email" class="form-control" id="confirmar-senha-cadastro"
+                               aria-describedby="emailHelp"
+                               placeholder="Confirmar Senha">
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="termos-e-politicas">
+                        <small class="form-check-label">Concordo com a <a href="#">
+                            Política de Privacidade</a> e os <a href="#">Termos de Uso</a> do
+                            Comercial Alegria</small>
+                    </div>
+                    <a type="submit" class="btn btn-success col-12 mt-4">Criar Conta</a>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="col-md-4"></div>
+</div>
+{% endblock body %}
