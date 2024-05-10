@@ -32,12 +32,22 @@
                     <form class="d-flex" role="search" action="{% url 'produtos:pagina_de_pesquisa' %}">
                         <input class="form-control" value="{{ request.GET.search }}" name="search" type="search"
                                placeholder="O que você procura?" autocomplete="off">
-                        <button class="btn btn-outline-success me-5" type="submit"><img src="{% static 'img/icone-pesquisa.png' %}" width="30" height="24"></button>
-                        <div class="ml-auto">
-                            <a class="navbar-brand" href="{% url 'base:cadastro_e_login' %}">
-                                <img src="{% static 'img/usuario_icon_3.png' %}" alt="Bootstrap" width="36" height="30">
+                        <button class="btn btn-outline-success me-5" type="submit"><img
+                                src="{% static 'img/icone-pesquisa.png' %}" width="30" height="24"></button>
+                        <div class=" ml-auto dropdown">
+                            <a class="navbar-brand dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"
+                               href="#">
+                                <img src="{% static 'img/usuario_icon_3.png' %}" alt="Usuario" width="36" height="30">
+                                <small>{{ request.user.first_name | default:'Login' }}</small>
                             </a>
-
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-item">
+                                    <a class="dropdown-item" href="{% url 'login' %}">Entrar</a>
+                                </li>
+                                <li class="dropdown-item">
+                                    <a class="dropdown-item" href="{% url 'base:cadastro' %}">Cadastrar-se</a>
+                                </li>
+                            </ul>
                         </div>
                         <div>
                             <a class="navbar-brand" href="{% url 'produtos:pagina_do_carrinho' %}">
@@ -101,7 +111,7 @@
                                     <ul class="dropdown-menu"
                                         style="max-height: 70vh; overflow-y: auto; z-index: -1; padding-top: 30px; padding-bottom: 30px">
                                         {% for departamento in DEPARTAMENTOS %}
-                                        <li class="">
+                                        <li>
                                             <a class="dropdown-item"
                                                href="{{ departamento.get_absolute_url }}">
                                                 {{ departamento.nome }}
