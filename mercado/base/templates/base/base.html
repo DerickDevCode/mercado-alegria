@@ -34,11 +34,21 @@
                                placeholder="O que você procura?" autocomplete="off">
                         <button class="btn btn-outline-success me-5" type="submit"><img
                                 src="{% static 'img/icone-pesquisa.png' %}" width="30" height="24"></button>
+
+                        <!-- Ícone do Perfil do Usuário -->
+                        {% if user.is_authenticated %}
+                        <div class="ml-auto">
+                            <a class="navbar-brand" href="{% url 'base:perfil' %}">
+                                <img src="{% static 'img/usuario_icon_3.png' %}" alt="Bootstrap" width="36" height="30">
+                                <small>{{ request.user.first_name | default:'Conecte-se' }}</small>
+                            </a>
+                        </div>
+                        {% else %}
                         <div class=" ml-auto dropdown">
-                            <a class="navbar-brand dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"
+                            <a class="navbar-brand" data-bs-toggle="dropdown" aria-expanded="false"
                                href="#">
                                 <img src="{% static 'img/usuario_icon_3.png' %}" alt="Usuario" width="36" height="30">
-                                <small>{{ request.user.first_name | default:'Login' }}</small>
+                                <small>{{ request.user.first_name | default:'Conecte-se' }}</small>
                             </a>
                             <ul class="dropdown-menu">
                                 <li class="dropdown-item">
@@ -49,6 +59,8 @@
                                 </li>
                             </ul>
                         </div>
+                        {% endif %}
+
                         <div>
                             <a class="navbar-brand" href="{% url 'produtos:pagina_do_carrinho' %}">
                                 <img src="{% static 'img/carrinho-de-compras.png' %}" alt="Bootstrap" width="36"

@@ -23,3 +23,7 @@ def cadastro(request):
             return render(request, 'base/home.html')
         else:
             return render(request, 'base/cadastro.html', context={'form': form})
+
+
+def perfil(request):
+    return render(request, 'base/perfil.html', context={})

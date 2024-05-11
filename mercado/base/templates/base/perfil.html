@@ -1,0 +1,15 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block body %}
+<div class="row">
+    <div class="col-3"></div>
+    <div class="col">
+        <h1> Perfil do Usuário</h1>
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger col-12">Sair</button>
+        </form>
+    </div>
+    <div class="col-3"></div>
+</div>
+{% endblock body %}
