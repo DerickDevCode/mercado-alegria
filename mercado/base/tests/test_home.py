@@ -29,4 +29,13 @@ def test_favicon(resp):
 def test_logo_rodape(resp):
     assert_contains(resp, 'src="/static/img/banner.png"')
 
+
+@pytest.fixture
+def resp_home_com_usuario_logado(client_com_usuario_logado, db):
+    return client_com_usuario_logado.get(reverse('base:home'))
+
+
+def test_icone_do_usuario_logado(resp_home_com_usuario_logado):
+    assert_contains(resp_home_com_usuario_logado, f'<a class="navbar-brand" href="{reverse("base:perfil")}">')
+
 # Adicionar teste para a lista de produtos no dropdown.
