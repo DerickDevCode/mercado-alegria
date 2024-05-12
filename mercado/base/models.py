@@ -1,4 +1,3 @@
-# from django.db import models
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
 from django.core.mail import send_mail
@@ -44,11 +43,12 @@ class User(AbstractBaseUser, PermissionsMixin):
     E-mail and password are required. Other fields are optional.
     """
     first_name = models.CharField(_("first name"), max_length=150)
-    last_name = models.CharField(_("last name"), max_length=150, null=True, blank=True)
-    date_of_birth = models.DateField(_("date of birth"), max_length=10, null=True, blank=True)
+    last_name = models.CharField(_("last name"), max_length=150, null=True)
+    date_of_birth = models.DateField(_("date of birth"), max_length=10, null=True)
     email = models.EmailField(_("email address"), unique=True)
-    cpf = models.CharField(_("cpf"), max_length=14, unique=True, null=True, blank=True)
-    phone_number = models.CharField(_("phone number"), max_length=16, null=True, blank=True)
+    cpf = models.CharField(_("cpf"), max_length=14, unique=True, null=True)
+    phone_number = models.CharField(_("phone number"), max_length=16, null=True)
+    password = models.CharField(_("password"), max_length=150)
     is_staff = models.BooleanField(
         _("staff status"),
         default=False,
