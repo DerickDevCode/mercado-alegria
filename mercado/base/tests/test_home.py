@@ -29,9 +29,4 @@ def test_favicon(resp):
 def test_logo_rodape(resp):
     assert_contains(resp, 'src="/static/img/banner.png"')
 
-# descomentar quando implementar o link e o botão da página definitivo
-# def test_login_link_e_botao(resp):
-#     assert_contains(resp, 'href="<link da página de cadastro de usuário>"')
-#     assert_contains(resp, 'src="/static/img/usuario_icon_3"')
-
 # Adicionar teste para a lista de produtos no dropdown.
