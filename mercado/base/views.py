@@ -1,5 +1,6 @@
+from django.contrib.auth import login
 from django.contrib.auth.hashers import make_password
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from mercado.base.forms import UserForm
 from mercado.base.models import User
@@ -20,7 +21,8 @@ def cadastro(request):
             user = User.objects.get(email=form.cleaned_data['email'])
             user.password = make_password(form.cleaned_data['password'])
             user.save()
-            return render(request, 'base/home.html')
+            login(request, user=user)
+            return redirect('/')
         else:
             return render(request, 'base/cadastro.html', context={'form': form})
 
