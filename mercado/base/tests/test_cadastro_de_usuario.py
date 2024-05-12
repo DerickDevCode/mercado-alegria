@@ -2,6 +2,7 @@ import pytest
 from django.urls import reverse
 
 from mercado.base.django_assertions import assert_contains
+from mercado.base.models import User
 
 
 @pytest.fixture
@@ -15,9 +16,9 @@ def test_status_code(resp):
 
 # ------------------------ Testes do Front-end ------------------------ #
 
-def test_icone_do_usuario_com_palavra_default(resp):
-    assert_contains(resp, '''<img src="/static/img/usuario_icon_3.png" alt="Usuario" width="36" height="30">
-                                <small>Conecte-se</small>
+def test_icone_do_usuario_deslogado(resp):
+    assert_contains(resp, '''<a class="navbar-brand" data-bs-toggle="dropdown" aria-expanded="false"
+                               href="#">
                             ''')
 
 
@@ -55,3 +56,32 @@ def test_input_numero_de_telefone_esta_presente_na_pagina(resp):
 
 def test_input_senha_esta_presente_na_pagina(resp):
     assert_contains(resp, '<input type="password" name="password"')
+
+
+# ------------------------ Testes do Back-end ------------------------ #
+
+@pytest.fixture
+def usuario(db):
+    usuario_modelo = User.objects.create_user(first_name='teste', last_name='testando', date_of_birth='2000-01-01',
+                                              email='usuario@exemplo.com',
+                                              cpf='000.000.000-00', phone_number='00 00000-0000', password='teste')
+    senha = 'teste'
+    usuario_modelo.set_password(senha)
+    usuario_modelo.save()
+    usuario_modelo.senha_plana = senha
+    return usuario_modelo
+
+
+@pytest.fixture
+def resp_post_cadastro(client, db):
+    return client.post(reverse('base:cadastro'), {'first_name': 'teste cadastro', 'last_name': 'cadastrando',
+                                                  'date_of_birth': '2000-01-01',
+                                                  'email': 'teste_criacao_usuario@gmail.com',
+                                                  'cpf': '123.456.789-00',
+                                                  'phone_number': '000.000.000-00',
+                                                  'password': 'teste'})
+
+
+def test_confirmacao_de_usuario_criado_apos_cadastro(resp_post_cadastro):
+    assert User.objects.get(
+        email='teste_criacao_usuario@gmail.com').email == 'teste_criacao_usuario@gmail.com'
