@@ -22,8 +22,8 @@
                 <div class="form-group mt-4">
                     <form action="" method="POST">
                         {% csrf_token %}
-                        <input type="email" class="form-control mb-4" name="username" placeholder="E-mail">
-                        <input type="password" class="form-control mb-4" name="password" placeholder="Senha">
+                        <input type="email" name="username" class="form-control mb-4" placeholder="E-mail">
+                        <input type="password" name="password" class="form-control mb-4" placeholder="Senha">
 
                         <input type="submit" value="Enviar" class="btn btn-success col-12 mt-4">
                     </form>

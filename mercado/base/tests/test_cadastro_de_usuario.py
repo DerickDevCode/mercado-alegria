@@ -61,18 +61,6 @@ def test_input_senha_esta_presente_na_pagina(resp):
 # ------------------------ Testes do Back-end ------------------------ #
 
 @pytest.fixture
-def usuario(db):
-    usuario_modelo = User.objects.create_user(first_name='teste', last_name='testando', date_of_birth='2000-01-01',
-                                              email='usuario@exemplo.com',
-                                              cpf='000.000.000-00', phone_number='00 00000-0000', password='teste')
-    senha = 'teste'
-    usuario_modelo.set_password(senha)
-    usuario_modelo.save()
-    usuario_modelo.senha_plana = senha
-    return usuario_modelo
-
-
-@pytest.fixture
 def resp_post_cadastro(client, db):
     return client.post(reverse('base:cadastro'), {'first_name': 'teste cadastro', 'last_name': 'cadastrando',
                                                   'date_of_birth': '2000-01-01',
