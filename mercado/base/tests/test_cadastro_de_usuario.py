@@ -1,7 +1,7 @@
 import pytest
 from django.urls import reverse
 
-from mercado.base.django_assertions import assert_contains
+from mercado.django_assertions import assert_contains
 from mercado.base.models import User
 
 

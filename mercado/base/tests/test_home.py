@@ -1,7 +1,7 @@
 import pytest
 from django.urls import reverse
 
-from mercado.base.django_assertions import assert_contains
+from mercado.django_assertions import assert_contains
 
 
 @pytest.fixture
@@ -31,7 +31,7 @@ def test_logo_rodape(resp):
 
 
 @pytest.fixture
-def resp_home_com_usuario_logado(client_com_usuario_logado, db):
+def resp_home_com_usuario_logado(client_com_usuario_logado):
     return client_com_usuario_logado.get(reverse('base:home'))
 
 

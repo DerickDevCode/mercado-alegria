@@ -4,7 +4,7 @@ import pytest
 from django.urls import reverse
 from model_bakery import baker
 
-from mercado.base.django_assertions import assert_contains
+from mercado.django_assertions import assert_contains
 from mercado.produtos.models import Departamento, Categoria, Subcategoria
 
 
