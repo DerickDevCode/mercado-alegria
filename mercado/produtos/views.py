@@ -1,7 +1,8 @@
 from django.shortcuts import render
 
+from mercado.base.models import User
 from mercado.produtos import facade
-from mercado.produtos.carrinho import Carrinho
+from mercado.produtos.carrinho import Carrinho, calcular_total_itens, obter_carrinho_e_itens
 from mercado.produtos.models import Produto
 
 
@@ -51,13 +52,10 @@ def pagina_de_pesquisa(request):
 
 
 def pagina_do_carrinho(request):
-    carrinho = Carrinho(request)
-    produtos_carrinho = carrinho.get_products()
-    total = 0
-    for item in produtos_carrinho:
-        total += item.produto.preco * item.quantidade
+    carrinho, carrinhoitem = obter_carrinho_e_itens(request)
+    total = calcular_total_itens(carrinhoitem)
     return render(request, 'produtos/carrinho.html',
-                  context={'carrinho': carrinho, 'produtos_carrinho': produtos_carrinho, 'total': total})
+                  context={'carrinho': carrinho, 'carrinhoitem': carrinhoitem, 'total': total})
 
 
 def adicionar_ao_carrinho(request, produto_id: int):

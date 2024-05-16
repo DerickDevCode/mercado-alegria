@@ -1,15 +1,16 @@
 from decimal import Decimal
 
 from mercado import settings
+from mercado.produtos import facade
 from mercado.produtos.models import Produto
 
 
 class Carrinho:
     def __init__(self, request):
         self.session = request.session
-        carrinho = self.session.get(settings.CARRRINHO_SESSION_ID)
-        if settings.CARRRINHO_SESSION_ID not in request.session:
-            carrinho = self.session[settings.CARRRINHO_SESSION_ID] = {}
+        carrinho = self.session.get(settings.CARRINHO_SESSION_ID)
+        if settings.CARRINHO_SESSION_ID not in request.session:
+            carrinho = self.session[settings.CARRINHO_SESSION_ID] = {}
         self.carrinho = carrinho
 
     def add_product_to_cart(self, produto, quantidade=1):
@@ -46,13 +47,6 @@ class Carrinho:
             carrinho.append(ItemCarrinho(produto=produto, carrinho=self.carrinho, quantidade=p['quantidade']))
         return carrinho
 
-    def __len__(self):
-        return sum(item['quantidade'] for item in self.carrinho.values())
-
-    def get_sub_total_price(self):
-        return sum(Decimal(item['preco']) * item['quantidade'] for item
-                   in self.carrinho.values())
-
 
 class ItemCarrinho:
     def __init__(self, produto, carrinho, quantidade):
@@ -63,3 +57,25 @@ class ItemCarrinho:
     @property
     def total(self):
         return self.quantidade * self.produto.preco
+
+
+# Funções criadas para melhor apresentação de código nas views do carrinho
+
+def calcular_total_itens(itens):
+    total = 0
+    for item in itens:
+        total += item.produto.preco * item.quantidade
+    return total
+
+
+def obter_carrinho_e_itens(request):
+    if request.user.is_authenticated:
+        try:
+            carrinho = facade.buscar_carrinho_existente(request)
+        except Exception:
+            carrinho = facade.criar_carrinho(request)
+        carrinhoitem = facade.listar_itens_do_carrinho(carrinho)
+    else:
+        carrinho = Carrinho(request)
+        carrinhoitem = carrinho.get_products()
+    return carrinho, carrinhoitem
