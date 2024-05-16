@@ -29,9 +29,9 @@ class Carrinho:
             pass
         self.session.modified = True
 
-    def exclude_product_from_cart(self, produto):
+    def exclude_product_from_cart(self, produto_id):
+        produto_id = str(produto_id)
         try:
-            produto_id = str(produto.id)
             del self.carrinho[produto_id]
             self.session.modified = True
         except Exception:
@@ -119,5 +119,22 @@ def remover_produto_do_carrinho(request, produto_id):
     else:
         carrinho = Carrinho(request)
         carrinho.remove_product_from_cart(produto_id)
+        carrinhoitens = carrinho.get_products()
+    return carrinho, carrinhoitens
+
+
+def excluir_produto_do_carrinho(request, produto_id):
+    if request.user.is_authenticated:
+        carrinho = facade.buscar_carrinho_existente(request)
+        produto = Produto.objects.get(id=produto_id)
+        try:
+            item = facade.buscar_item_do_carrinho(produto)
+            item.delete()
+        except Exception:
+            pass
+        carrinhoitens = facade.listar_itens_do_carrinho(carrinho)
+    else:
+        carrinho = Carrinho(request)
+        carrinho.exclude_product_from_cart(produto_id)
         carrinhoitens = carrinho.get_products()
     return carrinho, carrinhoitens
