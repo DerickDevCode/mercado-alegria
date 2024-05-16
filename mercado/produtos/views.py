@@ -1,8 +1,8 @@
 from django.shortcuts import render
 
-from mercado.base.models import User
 from mercado.produtos import facade
-from mercado.produtos.carrinho import Carrinho, calcular_total_itens, obter_carrinho_e_itens
+from mercado.produtos.carrinho import Carrinho, calcular_total_itens, obter_carrinho_e_itens, \
+    adicionar_produto_ao_carrinho, remover_produto_do_carrinho
 from mercado.produtos.models import Produto
 
 
@@ -52,34 +52,24 @@ def pagina_de_pesquisa(request):
 
 
 def pagina_do_carrinho(request):
-    carrinho, carrinhoitem = obter_carrinho_e_itens(request)
-    total = calcular_total_itens(carrinhoitem)
+    carrinho, carrinhoitens = obter_carrinho_e_itens(request)
+    total = calcular_total_itens(carrinhoitens)
     return render(request, 'produtos/carrinho.html',
-                  context={'carrinho': carrinho, 'carrinhoitem': carrinhoitem, 'total': total})
+                  context={'carrinho': carrinho, 'carrinhoitens': carrinhoitens, 'total': total})
 
 
 def adicionar_ao_carrinho(request, produto_id: int):
-    carrinho = Carrinho(request)
-    produto = Produto.objects.get(id=produto_id)
-    carrinho.add_product_to_cart(produto)
-    produtos_carrinho = carrinho.get_products()
-    total = 0
-    for item in produtos_carrinho:
-        total += item.produto.preco * item.quantidade
+    carrinho, carrinhoitens = adicionar_produto_ao_carrinho(request, produto_id)
+    total = calcular_total_itens(carrinhoitens)
     return render(request, 'produtos/carrinho.html',
-                  context={'carrinho': carrinho, 'produtos_carrinho': produtos_carrinho, 'total': total})
+                  context={'carrinho': carrinho, 'carrinhoitens': carrinhoitens, 'total': total})
 
 
 def remover_do_carrinho(request, produto_id: int):
-    carrinho = Carrinho(request)
-    produto = Produto.objects.get(id=produto_id)
-    carrinho.remove_product_from_cart(produto)
-    produtos_carrinho = carrinho.get_products()
-    total = 0
-    for item in produtos_carrinho:
-        total += item.produto.preco * item.quantidade
+    carrinho, carrinhoitens = remover_produto_do_carrinho(request, produto_id)
+    total = calcular_total_itens(carrinhoitens)
     return render(request, 'produtos/carrinho.html',
-                  context={'carrinho': carrinho, 'produtos_carrinho': produtos_carrinho, 'total': total})
+                  context={'carrinho': carrinho, 'carrinhoitens': carrinhoitens, 'total': total})
 
 
 def excluir_do_carrinho(request, produto_id: int):
