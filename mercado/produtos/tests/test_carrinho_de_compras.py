@@ -50,32 +50,32 @@ def test_status_code(resp):
 
 
 def test_funcao_add_product_to_cart(resp, carrinho, produto1):
-    carrinho.add_product_to_cart(produto=produto1, quantidade=1)
+    carrinho.add_product_to_cart(produto_id=str(produto1.id), quantidade=1)
     assert len(carrinho.carrinho) == 1
     assert carrinho.carrinho[str(produto1.id)]['quantidade'] == 1
 
 
 def test_funcao_remove_product_from_cart_com_mais_de_uma_quantidade(resp, carrinho, produto1):
-    carrinho.add_product_to_cart(produto=produto1, quantidade=2)
-    carrinho.remove_product_from_cart(produto=produto1)
+    carrinho.add_product_to_cart(produto_id=str(produto1.id), quantidade=2)
+    carrinho.remove_product_from_cart(produto_id=str(produto1.id))
     assert len(carrinho.carrinho) == 1
     assert carrinho.carrinho[str(produto1.id)]['quantidade'] == 1
 
 
 def test_funcao_remove_product_from_cart_com_apenas_uma_quantidade(resp, carrinho, produto1):
-    carrinho.add_product_to_cart(produto=produto1, quantidade=1)
-    carrinho.remove_product_from_cart(produto=produto1)
+    carrinho.add_product_to_cart(produto_id=str(produto1.id), quantidade=1)
+    carrinho.remove_product_from_cart(produto_id=str(produto1.id))
     assert len(carrinho.carrinho) == 0
 
 
 def test_funcao_exclude_product_from_cart(resp, carrinho, produto1, produto2):
-    carrinho.add_product_to_cart(produto=produto1, quantidade=3)
-    carrinho.exclude_product_from_cart(produto=produto1)
+    carrinho.add_product_to_cart(produto_id=str(produto1.id), quantidade=3)
+    carrinho.exclude_product_from_cart(produto_id=str(produto1.id))
     assert len(carrinho.carrinho) == 0
 
 
 def test_funcao_get_products(resp, carrinho, produto1, produto2):
-    carrinho.add_product_to_cart(produto=produto1, quantidade=1)
-    carrinho.add_product_to_cart(produto=produto2, quantidade=2)
+    carrinho.add_product_to_cart(produto_id=str(produto1.id), quantidade=1)
+    carrinho.add_product_to_cart(produto_id=str(produto2.id), quantidade=2)
     produtos = carrinho.get_products()
     assert len(produtos) == 2
