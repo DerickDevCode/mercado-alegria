@@ -1,8 +1,6 @@
-from decimal import Decimal
-
 from mercado import settings
 from mercado.produtos import facade
-from mercado.produtos.models import Produto
+from mercado.produtos.models import Produto, CarrinhoItem
 
 
 class Carrinho:
@@ -13,16 +11,16 @@ class Carrinho:
             carrinho = self.session[settings.CARRINHO_SESSION_ID] = {}
         self.carrinho = carrinho
 
-    def add_product_to_cart(self, produto, quantidade=1):
-        produto_id = str(produto.id)
+    def add_product_to_cart(self, produto_id, quantidade=1):
+        produto_id = str(produto_id)
         if produto_id in self.carrinho:
             self.carrinho[produto_id]['quantidade'] += 1
         else:
             self.carrinho[produto_id] = {'quantidade': quantidade}
         self.session.modified = True
 
-    def remove_product_from_cart(self, produto):
-        produto_id = str(produto.id)
+    def remove_product_from_cart(self, produto_id):
+        produto_id = str(produto_id)
         try:
             self.carrinho[produto_id]['quantidade'] -= 1
             if self.carrinho[produto_id]['quantidade'] <= 0:
@@ -74,8 +72,52 @@ def obter_carrinho_e_itens(request):
             carrinho = facade.buscar_carrinho_existente(request)
         except Exception:
             carrinho = facade.criar_carrinho(request)
-        carrinhoitem = facade.listar_itens_do_carrinho(carrinho)
+        carrinhoitens = facade.listar_itens_do_carrinho(carrinho)
     else:
         carrinho = Carrinho(request)
-        carrinhoitem = carrinho.get_products()
-    return carrinho, carrinhoitem
+        carrinhoitens = carrinho.get_products()
+    return carrinho, carrinhoitens
+
+
+def adicionar_produto_ao_carrinho(request, produto_id):
+    if request.user.is_authenticated:
+        try:
+            carrinho = facade.buscar_carrinho_existente(request)
+        except Exception:
+            carrinho = facade.criar_carrinho(request)
+
+        produto = Produto.objects.get(id=produto_id)
+
+        try:
+            item = facade.buscar_item_do_carrinho(produto)
+            item.quantidade += 1
+            item.save()
+        except Exception:
+            novo_item = CarrinhoItem(produto=produto, carrinho=carrinho)
+            novo_item.save()
+        carrinhoitens = facade.listar_itens_do_carrinho(carrinho)
+    else:
+        carrinho = Carrinho(request)
+        carrinho.add_product_to_cart(produto_id)
+        carrinhoitens = carrinho.get_products()
+    return carrinho, carrinhoitens
+
+
+def remover_produto_do_carrinho(request, produto_id):
+    if request.user.is_authenticated:
+        carrinho = facade.buscar_carrinho_existente(request)
+        produto = Produto.objects.get(id=produto_id)
+        try:
+            item = facade.buscar_item_do_carrinho(produto)
+            item.quantidade -= 1
+            item.save()
+            if item.quantidade <= 0:
+                item.delete()
+        except Exception:
+            pass
+        carrinhoitens = facade.listar_itens_do_carrinho(carrinho)
+    else:
+        carrinho = Carrinho(request)
+        carrinho.remove_product_from_cart(produto_id)
+        carrinhoitens = carrinho.get_products()
+    return carrinho, carrinhoitens
