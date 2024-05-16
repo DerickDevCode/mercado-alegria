@@ -1,9 +1,8 @@
 from django.shortcuts import render
 
 from mercado.produtos import facade
-from mercado.produtos.carrinho import Carrinho, calcular_total_itens, obter_carrinho_e_itens, \
-    adicionar_produto_ao_carrinho, remover_produto_do_carrinho
-from mercado.produtos.models import Produto
+from mercado.produtos.carrinho import calcular_total_itens, obter_carrinho_e_itens, \
+    adicionar_produto_ao_carrinho, remover_produto_do_carrinho, excluir_produto_do_carrinho
 
 
 def produto(request, departamento, categoria, subcategoria, slug):
@@ -73,12 +72,7 @@ def remover_do_carrinho(request, produto_id: int):
 
 
 def excluir_do_carrinho(request, produto_id: int):
-    carrinho = Carrinho(request)
-    produto = Produto.objects.get(id=produto_id)
-    carrinho.exclude_product_from_cart(produto)
-    produtos_carrinho = carrinho.get_products()
-    total = 0
-    for item in produtos_carrinho:
-        total += item.produto.preco * item.quantidade
+    carrinho, carrinhoitens = excluir_produto_do_carrinho(request, produto_id)
+    total = calcular_total_itens(carrinhoitens)
     return render(request, 'produtos/carrinho.html',
-                  context={'carrinho': carrinho, 'produtos_carrinho': produtos_carrinho, 'total': total})
+                  context={'carrinho': carrinho, 'carrinhoitens': carrinhoitens, 'total': total})
