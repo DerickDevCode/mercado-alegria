@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
-from django.db.models import CASCADE
+from django.db.models import CASCADE, UniqueConstraint
 from django.urls import reverse
 
 
@@ -83,4 +83,6 @@ class CarrinhoItem(models.Model):
         return self.quantidade * self.produto.preco
 
     class Meta:
-        unique_together = ['carrinho', 'produto']
+        constraints = [
+            UniqueConstraint(fields=['carrinho', 'produto'], name="unique_carrinho__produto")
+        ]
