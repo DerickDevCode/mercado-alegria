@@ -81,3 +81,6 @@ class CarrinhoItem(models.Model):
     @property
     def total(self):
         return self.quantidade * self.produto.preco
+
+    class Meta:
+        unique_together = ['carrinho', 'produto']
