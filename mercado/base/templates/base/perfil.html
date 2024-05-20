@@ -1,17 +1,54 @@
 {% extends 'base/base.html' %}
 {% load static %}
 {% block body %}
-<div class="row">
-    <div class="col-3"></div>
-    <div class="col">
-        <h1> Perfil do Usuário</h1>
+<div class="row margem-carrossel">
+    <div class="mt-5"></div>
+    <div class="col-2"></div>
+    <div class="col-md-8">
+        <h2 class="text-center text-muted mb-3"><b>Minha Conta</b></h2>
+        <div>
+            <ul style="list-style: none">
+                <li style="display: inline-block">
+                    <a class="btn"
+                       style="margin: 15px; font-size: 16px; border: 1px solid #666; padding-right: 60px; padding-top: 12px; padding-bottom: 12px; width: 230px"
+                       href="#">
+                        <img src="{% static 'img/icone-editar-usuario.png' %}" width="40"
+                             height="35"
+                             style="margin-right: 4px">Editar Perfil</a>
+                </li>
+                <li style="display: inline-block">
+                    <a class="btn"
+                       style="margin: 15px; font-size: 16px; border: 1px solid #666; padding-right: 60px; padding-top: 12px; padding-bottom: 12px; width: 230px"
+                       href="#">
+                        <img src="{% static 'img/icone-cadeado.png' %}" width="40"
+                             height="35"
+                             style="margin-right: 4px">Senha</a>
+                </li>
+                <li style="display: inline-block">
+                    <a class="btn"
+                       style="margin: 15px; font-size: 16px; border: 1px solid #666; padding-right: 60px; padding-top: 12px; padding-bottom: 12px; width: 230px"
+                       href="#">
+                        <img src="{% static 'img/icone-coracao.png' %}" width="40"
+                             height="35"
+                             style="margin-right: 4px">Meus Favoritos</a>
+                </li>
+                <li style="display: inline-block">
+                    <a class="btn"
+                       style="margin: 15px; font-size: 16px; border: 1px solid #666; padding-right: 60px; padding-top: 12px; padding-bottom: 12px; width: 230px"
+                       href="#">
+                        <img src="{% static 'img/icone-cartao-pagamento.png' %}" width="40"
+                             height="35"
+                             style="margin-right: 4px">Pagamentos</a>
+                </li>
+            </ul>
+        </div>
         {% if user.is_authenticated %}
-        <form method="post" action="{% url 'logout' %}">
+        <form method="post" action="{% url 'logout' %}" style="text-align: center">
             {% csrf_token %}
-            <button type="submit" class="btn btn-danger col-12">Sair</button>
+            <button type="submit" class="btn btn-danger col-6">Sair</button>
         </form>
         {% endif %}
     </div>
-    <div class="col-3"></div>
+    <div class="col-2"></div>
 </div>
 {% endblock body %}
