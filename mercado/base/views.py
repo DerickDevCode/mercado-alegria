@@ -1,4 +1,5 @@
 from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password
 from django.shortcuts import render, redirect
 
@@ -27,5 +28,6 @@ def cadastro(request):
             return render(request, 'base/cadastro.html', context={'form': form})
 
 
+@login_required
 def perfil(request):
     return render(request, 'base/perfil.html', context={})
