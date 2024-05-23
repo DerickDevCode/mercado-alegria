@@ -8,7 +8,8 @@
         <ul class="nav nav-tabs" id="myTab" role="tablist">
 
             <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="cadastro-tab" data-bs-toggle="tab" data-bs-target="#cadastro-tab-pane"
+                <button class="nav-link active" id="cadastro-tab" data-bs-toggle="tab"
+                        data-bs-target="#cadastro-tab-pane"
                         type="button"
                         role="tab" aria-controls="profile-tab-pane" aria-selected="true">Cadastrar-se
                 </button>
@@ -24,13 +25,56 @@
                 <div class="form-group mt-4">
                     <form action="" method="POST">
                         {% csrf_token %}
-                        {{ form.first_name }}
-                        {{ form.last_name }}
-                        {{ form.date_of_birth }}
-                        {{ form.email }}
-                        {{ form.cpf }}
-                        {{ form.phone_number }}
-                        {{ form.password }}
+
+                        <div class="mb-4">
+                            {{ form.first_name }}
+                            {% for error in form.first_name.errors %}
+                            <div style="color: red">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="mb-4">
+                            {{ form.last_name }}
+                            {% for error in form.last_name.errors %}
+                            <div style="color: red">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="mb-4">
+                            {{ form.date_of_birth }}
+                            {% for error in form.date_of_birth.errors %}
+                            <div style="color: red">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="mb-4">
+                            {{ form.email }}
+                            {% for error in form.email.errors %}
+                            <div style="color: red">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="mb-4">
+                            {{ form.cpf }}
+                            {% for error in form.cpf.errors %}
+                            <div style="color: red">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="mb-4">
+                            {{ form.phone_number }}
+                            {% for error in form.phone_number.errors %}
+                            <div style="color: red">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="mb-4">
+                            {{ form.password }}
+                            {% for error in form.password.errors %}
+                            <div style="color: red">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+
                         <input type="submit" value="Criar Conta" class="btn btn-success col-12 mt-4">
                     </form>
                 </div>
