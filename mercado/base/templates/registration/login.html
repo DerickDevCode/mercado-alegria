@@ -23,8 +23,19 @@
                 <div class="form-group mt-4">
                     <form action="" method="POST">
                         {% csrf_token %}
-                        <input type="email" name="username" class="form-control mb-4" placeholder="E-mail">
-                        <input type="password" name="password" class="form-control mb-4" placeholder="Senha">
+
+                        <div class="mb-4">
+                            <input type="email" name="username" class="form-control" placeholder="E-mail">
+                            {% if form.errors %}
+                            <div style="color: red">
+                                Seu nome de usuário e senha não correspondem. Por favor, tente novamente.
+                            </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-4">
+                            <input type="password" name="password" class="form-control" placeholder="Senha">
+                        </div>
 
                         <input type="submit" value="Enviar" class="btn btn-success col-12 mt-4">
                     </form>
