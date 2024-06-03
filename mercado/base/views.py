@@ -31,3 +31,19 @@ def cadastro(request):
 @login_required
 def perfil(request):
     return render(request, 'base/perfil.html', context={})
+
+
+@login_required
+def editar_perfil(request):
+    if request.method == 'GET':
+        user = request.user
+        form = UserForm
+        return render(request, 'base/editar_perfil.html', context={'form': form, 'user': user})
+    elif request.method == 'POST':
+        user = request.user
+        form = UserForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+        else:
+            return render(request, 'base/editar_perfil.html', context={'form': form})
