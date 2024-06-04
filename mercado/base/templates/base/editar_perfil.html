@@ -38,7 +38,10 @@
                         </div>
 
                         <div class="mb-4">
-                            {{ form.date_of_birth }}
+<!--                            {{ form.date_of_birth }}-->
+                            <input type="date" name="date_of_birth" class="form-control"
+                                   value="{{form.date_of_birth.value|stringformat:'s'}}"
+                                   maxlength="10" required id="id_date_of_birth">
                             {% for error in form.date_of_birth.errors %}
                             <div style="color: red">{{ error }}</div>
                             {% endfor %}
