@@ -37,7 +37,7 @@ def perfil(request):
 def editar_perfil(request):
     if request.method == 'GET':
         user = request.user
-        form = UserForm
+        form = UserForm(instance=user)
         return render(request, 'base/editar_perfil.html', context={'form': form, 'user': user})
     elif request.method == 'POST':
         user = request.user

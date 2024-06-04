@@ -24,49 +24,42 @@
                         {% csrf_token %}
 
                         <div class="mb-4">
-                            <input type="text" name="first_name" class="form-control" value="{{user.first_name}}"
-                                   maxlength="150" required id="id_first_name">
+                            {{ form.first_name }}
                             {% for error in form.first_name.errors %}
                             <div style="color: red">{{ error }}</div>
                             {% endfor %}
                         </div>
 
                         <div class="mb-4">
-                            <input type="text" name="last_name" class="form-control" value="{{user.last_name}}"
-                                   maxlength="150" required id="id_last_name">
+                            {{ form.last_name }}
                             {% for error in form.last_name.errors %}
                             <div style="color: red">{{ error }}</div>
                             {% endfor %}
                         </div>
 
                         <div class="mb-4">
-                            <input type="date" name="date_of_birth" class="form-control"
-                                   placeholder="{{user.date_of_birth}}" value="{{user.date_of_birth}}"
-                                   maxlength="10" required id="id_date_of_birth">
+                            {{ form.date_of_birth }}
                             {% for error in form.date_of_birth.errors %}
                             <div style="color: red">{{ error }}</div>
                             {% endfor %}
                         </div>
 
                         <div class="mb-4">
-                            <input type="email" name="email" class="form-control" value="{{user.email}}"
-                                   required id="id_email">
+                            {{form.email }}
                             {% for error in form.email.errors %}
                             <div style="color: red">{{ error }}</div>
                             {% endfor %}
                         </div>
 
                         <div class="mb-4">
-                            <input type="text" name="cpf" class="form-control" value="{{user.cpf}}"
-                                   maxlength="14" required id="id_cpf">
+                            {{ form.cpf }}
                             {% for error in form.cpf.errors %}
                             <div style="color: red">{{ error }}</div>
                             {% endfor %}
                         </div>
 
                         <div class="mb-4">
-                            <input type="text" name="phone_number" class="form-control"
-                                   value="{{user.phone_number}}" maxlength="16" required id="id_phone_number">
+                            {{ form.phone_number }}
                             {% for error in form.phone_number.errors %}
                             <div style="color: red">{{ error }}</div>
                             {% endfor %}
