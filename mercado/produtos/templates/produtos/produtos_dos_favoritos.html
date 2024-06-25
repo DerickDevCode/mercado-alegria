@@ -1,0 +1,41 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block body %}
+
+<!-- produtos -->
+<div class="text-center text-muted mt-4 mb-4">
+    <h2><b>Meus Favoritos</b></h2>
+</div>
+
+<div class="row" style="margin-top: 10px">
+
+    {% for produto in produtos %}
+    <div class="col-md-2 my-2">
+        <div class="card border-0 text-center" style="box-shadow: 0 0 5px rgba(0, 0, 0, 0.3)">
+            <a class="" style="text-align: right"
+               href="{% url 'produtos:remover_dos_favoritos' produto_id=produto.id %}">
+                <img src="{% static 'img/icone-coracao-preenchido.png' %}" class="card-img-top"
+                     style="object-fit: contain; width: 48px; padding: 4px;" alt="teste">
+            </a>
+            <a class="text-decoration-none ratio ratio-1x1" href="{{ produto.get_absolute_url }}">
+                <img src="{{ produto.imagem.url }}" class="card-img-top" style="object-fit: contain" alt="teste">
+            </a>
+            <div class="card-body">
+                <div>
+                    <div style="height: 100px">
+                        <a class="text-decoration-none" href="{{ produto.get_absolute_url }}">
+                            <p class="card-text text-muted">{{ produto.nome }}</p></a>
+                    </div>
+                </div>
+                <h5 class="card-title text-success"><b>R$ {{ produto.preco }}</b></h5>
+                <a class="btn btn-warning" href="{% url 'produtos:adicionar_ao_carrinho' produto_id=produto.id %}">
+                    Adicionar ao carrinho
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+
+{% endblock body %}

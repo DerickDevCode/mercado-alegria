@@ -103,7 +103,7 @@ def adicionar_aos_favoritos(request, produto_id: int):
     produto = Produto.objects.get(id=produto_id)
 
     try:
-        item = facade.buscar_item_dos_favoritos(produto)
+        facade.buscar_item_dos_favoritos(produto)
     except Exception:
         novo_item = ItemFavoritos(produto=produto, favoritos=favoritos)
         novo_item.save()
