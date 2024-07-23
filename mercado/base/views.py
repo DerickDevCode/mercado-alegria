@@ -31,3 +31,11 @@ def cadastro(request):
 @login_required
 def perfil(request):
     return render(request, 'base/perfil.html', context={})
+
+
+def quem_somos_nos(request):
+    return render(request, 'base/quem_somos_nos.html')
+
+
+def politica_de_privacidade(request):
+    return render(request, 'base/politica_de_privacidade.html')
