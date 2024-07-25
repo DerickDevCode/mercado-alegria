@@ -43,3 +43,7 @@ def politica_de_privacidade(request):
 
 def politica_de_entrega(request):
     return render(request, 'base/politica_de_entrega.html')
+
+
+def trocas_e_devolucoes(request):
+    return render(request, 'base/trocas_e_devolucoes.html')
