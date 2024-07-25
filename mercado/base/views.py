@@ -47,3 +47,7 @@ def politica_de_entrega(request):
 
 def trocas_e_devolucoes(request):
     return render(request, 'base/trocas_e_devolucoes.html')
+
+
+def políticas_de_cancelamentos_e_ressarcimentos(request):
+    return render(request, 'base/políticas_de_cancelamentos_e_ressarcimentos.html')
