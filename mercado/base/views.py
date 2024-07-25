@@ -39,3 +39,7 @@ def quem_somos_nos(request):
 
 def politica_de_privacidade(request):
     return render(request, 'base/politica_de_privacidade.html')
+
+
+def politica_de_entrega(request):
+    return render(request, 'base/politica_de_entrega.html')
