@@ -49,5 +49,9 @@ def trocas_e_devolucoes(request):
     return render(request, 'base/trocas_e_devolucoes.html')
 
 
-def políticas_de_cancelamentos_e_ressarcimentos(request):
+def politicas_de_cancelamentos_e_ressarcimentos(request):
     return render(request, 'base/políticas_de_cancelamentos_e_ressarcimentos.html')
+
+
+def politica_de_venda_precos_ofertas_e_promocoes(request):
+    return render(request, 'base/política_de_venda_preços_ofertas_e_promoções.html')
