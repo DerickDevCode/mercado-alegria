@@ -55,3 +55,7 @@ def politicas_de_cancelamentos_e_ressarcimentos(request):
 
 def politica_de_venda_precos_ofertas_e_promocoes(request):
     return render(request, 'base/política_de_venda_preços_ofertas_e_promoções.html')
+
+
+def central_de_atendimento(request):
+    return render(request, 'base/central_de_atendimento.html')
