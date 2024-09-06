@@ -12,11 +12,20 @@
     {% for produto in PRODUTOS|slice:':6' %}
     <div class="col-md-2 my-2">
         <div class="card border-0 text-center" style="box-shadow: 0 0 5px rgba(0, 0, 0, 0.3)">
+            {% if produto in PRODUTOS_FAVORITOS %}
+            <a class="" style="text-align: right"
+               href="{% url 'produtos:remover_dos_favoritos' produto_id=produto.id %}">
+                <img src="{% static 'img/icone-coracao-preenchido.png' %}" class="card-img-top"
+                     style="object-fit: contain; width: 48px; padding: 4px;" alt="teste">
+            </a>
+            {% else %}
             <a class="" style="text-align: right"
                href="{% url 'produtos:adicionar_aos_favoritos' produto_id=produto.id %}">
                 <img src="{% static 'img/icone-coracao.png' %}" class="card-img-top"
                      style="object-fit: contain; width: 48px; padding: 4px;" alt="teste">
             </a>
+            {% endif %}
+
             <a class="text-decoration-none ratio ratio-1x1" href="{{ produto.get_absolute_url }}">
                 <img src="{{ produto.imagem.url }}" class="card-img-top" style="object-fit: contain" alt="teste">
             </a>
