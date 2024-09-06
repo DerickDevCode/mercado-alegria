@@ -12,10 +12,13 @@ def listar_departamentos_ordenados(slug):
 
 def listar_favoritos(request):
     produtos = []
-    try:
-        favoritos = facade.buscar_favoritos_existente(request)
-    except Exception:
-        favoritos = facade.criar_favoritos(request)
-    for item in facade.listar_itens_dos_favoritos(favoritos):
-        produtos.append(item.produto)
+    if request.user.is_authenticated:
+        try:
+            favoritos = facade.buscar_favoritos_existente(request)
+        except Exception:
+            favoritos = facade.criar_favoritos(request)
+        for item in facade.listar_itens_dos_favoritos(favoritos):
+            produtos.append(item.produto)
+    else:
+        pass
     return {'PRODUTOS_FAVORITOS': produtos}
