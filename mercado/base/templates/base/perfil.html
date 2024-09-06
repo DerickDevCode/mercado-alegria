@@ -11,7 +11,7 @@
                 <li style="display: inline-block">
                     <a class="btn"
                        style="margin: 15px; font-size: 16px; border: 1px solid #666; padding-right: 60px; padding-top: 12px; padding-bottom: 12px; width: 230px"
-                       href="#">
+                       href="{% url 'base:editar_perfil' %}">
                         <img src="{% static 'img/icone-editar-usuario.png' %}" width="40"
                              height="35"
                              style="margin-right: 4px">Editar Perfil</a>
@@ -19,7 +19,7 @@
                 <li style="display: inline-block">
                     <a class="btn"
                        style="margin: 15px; font-size: 16px; border: 1px solid #666; padding-right: 60px; padding-top: 12px; padding-bottom: 12px; width: 230px"
-                       href="#">
+                       href="{% url 'password_change' %}">
                         <img src="{% static 'img/icone-cadeado.png' %}" width="40"
                              height="35"
                              style="margin-right: 4px">Senha</a>
@@ -27,7 +27,7 @@
                 <li style="display: inline-block">
                     <a class="btn"
                        style="margin: 15px; font-size: 16px; border: 1px solid #666; padding-right: 60px; padding-top: 12px; padding-bottom: 12px; width: 230px"
-                       href="#">
+                       href="{% url 'produtos:pagina_dos_favoritos' %}">
                         <img src="{% static 'img/icone-coracao.png' %}" width="40"
                              height="35"
                              style="margin-right: 4px">Meus Favoritos</a>

@@ -2,7 +2,7 @@ from django.urls import path
 
 from mercado.produtos.views import produto, pagina_de_marcas, pagina_de_departamentos, pagina_de_categorias, \
     pagina_de_subcategorias, pagina_de_pesquisa, pagina_do_carrinho, adicionar_ao_carrinho, remover_do_carrinho, \
-    excluir_do_carrinho
+    excluir_do_carrinho, pagina_dos_favoritos, adicionar_aos_favoritos, remover_dos_favoritos
 
 app_name = 'produtos'
 urlpatterns = [
@@ -17,4 +17,7 @@ urlpatterns = [
     path('carrinho/adicionar/<int:produto_id>/', adicionar_ao_carrinho, name='adicionar_ao_carrinho'),
     path('carrinho/remover/<int:produto_id>/', remover_do_carrinho, name='remover_do_carrinho'),
     path('carrinho/excluir/<int:produto_id>/', excluir_do_carrinho, name='excluir_do_carrinho'),
+    path('favoritos/', pagina_dos_favoritos, name='pagina_dos_favoritos'),
+    path('favoritos/adicionar/<int:produto_id>/', adicionar_aos_favoritos, name='adicionar_aos_favoritos'),
+    path('favoritos/remover/<int:produto_id>/', remover_dos_favoritos, name='remover_dos_favoritos'),
 ]

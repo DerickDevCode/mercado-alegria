@@ -86,3 +86,22 @@ class CarrinhoItem(models.Model):
         constraints = [
             UniqueConstraint(fields=['carrinho', 'produto'], name="unique_carrinho__produto")
         ]
+
+
+class Favoritos(models.Model):
+    user = models.ForeignKey(get_user_model(), on_delete=CASCADE)
+    produtos = models.ManyToManyField(Produto, through='ItemFavoritos')
+
+    def __str__(self):
+        produtos = [item.nome for item in self.produtos.all()]
+        return f'{self.user.id}: ({produtos})'
+
+
+class ItemFavoritos(models.Model):
+    produto = models.ForeignKey(Produto, on_delete=CASCADE)
+    favoritos = models.ForeignKey(Favoritos, on_delete=CASCADE)
+
+    class Meta:
+        constraints = [
+            UniqueConstraint(fields=['favoritos', 'produto'], name="unique_favorito__produto")
+        ]

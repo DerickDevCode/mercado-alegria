@@ -1,4 +1,4 @@
-from mercado.produtos.models import Produto, Carrinho, CarrinhoItem
+from mercado.produtos.models import Produto, Carrinho, CarrinhoItem, Favoritos, ItemFavoritos
 
 
 def buscar_produto(slug):
@@ -112,3 +112,39 @@ def listar_itens_do_carrinho(carrinho):
     :return: retorna uma lista com todos os itens do carrinho
     """
     return CarrinhoItem.objects.filter(carrinho=carrinho).order_by('produto')
+
+
+def buscar_favoritos_existente(request):
+    """
+    Encontra os favoritos respectivo ao usuário do site através das informações do request
+    :param request: recebe o request
+    :return: retorna os favoritosavoritos do usuário
+    """
+    return Favoritos.objects.get(user=request.user)
+
+
+def criar_favoritos(request):
+    """
+    Cria um novo favoritos a partir do usuário do site através das informações do request
+    :param request: recebe o request
+    :return: retorna os favoritos do usuário
+    """
+    return Favoritos.objects.create(user=request.user)
+
+
+def listar_itens_dos_favoritos(favoritos):
+    """
+    Lista todos os itens dos favoritos
+    :param favoritos: recebe o favorito do usuário
+    :return: retorna uma lista com todos os itens dos favoritos
+    """
+    return ItemFavoritos.objects.filter(favoritos=favoritos).order_by('produto')
+
+
+def buscar_item_dos_favoritos(produto):
+    """
+    Encontra o item dos favoritos através do produto
+    :param produto: recebe o produto a ser encontrado dentro dos favoritos
+    :return: retorna o item(produto) dos favoritos
+    """
+    return ItemFavoritos.objects.get(produto=produto)

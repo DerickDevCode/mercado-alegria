@@ -66,10 +66,9 @@ def resp_post_cadastro(client, db):
                                                   'date_of_birth': '2000-01-01',
                                                   'email': 'teste_criacao_usuario@gmail.com',
                                                   'cpf': '123.456.789-00',
-                                                  'phone_number': '000.000.000-00',
-                                                  'password': 'teste'})
+                                                  'phone_number': '00 00000-0000',
+                                                  'password': 'testando123'})
 
 
 def test_confirmacao_de_usuario_criado_apos_cadastro(resp_post_cadastro):
-    assert User.objects.get(
-        email='teste_criacao_usuario@gmail.com').email == 'teste_criacao_usuario@gmail.com'
+    assert User.objects.get(email='teste_criacao_usuario@gmail.com').email == 'teste_criacao_usuario@gmail.com'

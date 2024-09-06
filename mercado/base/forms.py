@@ -41,7 +41,7 @@ class UserForm(forms.ModelForm):
         },
         'password': {
             'numeros_e_letras': _('Sua senha deve conter números e letras.'),
-            'senha_curta': _('Sua senha deve conter no mínimo 6 caracteres.'),
+            'senha_curta': _('Sua senha deve conter no mínimo 8 caracteres.'),
         },
     }
 
@@ -79,7 +79,7 @@ class UserForm(forms.ModelForm):
 
     def clean_password(self):
         password = self.cleaned_data.get('password')
-        if not len(password) >= 6:
+        if not len(password) >= 8:
             raise ValidationError(self.error_messages['password']['senha_curta'])
         if password.isalpha() or password.isnumeric():
             raise ValidationError(self.error_messages['password']['numeros_e_letras'])
