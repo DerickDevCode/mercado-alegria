@@ -47,3 +47,31 @@ def editar_perfil(request):
             return redirect('/')
         else:
             return render(request, 'base/editar_perfil.html', context={'form': form})
+          
+          
+def quem_somos_nos(request):
+    return render(request, 'base/quem_somos_nos.html')
+
+
+def politica_de_privacidade(request):
+    return render(request, 'base/politica_de_privacidade.html')
+
+
+def politica_de_entrega(request):
+    return render(request, 'base/politica_de_entrega.html')
+
+
+def trocas_e_devolucoes(request):
+    return render(request, 'base/trocas_e_devolucoes.html')
+
+
+def politicas_de_cancelamentos_e_ressarcimentos(request):
+    return render(request, 'base/políticas_de_cancelamentos_e_ressarcimentos.html')
+
+
+def politica_de_venda_precos_ofertas_e_promocoes(request):
+    return render(request, 'base/política_de_venda_preços_ofertas_e_promoções.html')
+
+
+def central_de_atendimento(request):
+    return render(request, 'base/central_de_atendimento.html')
