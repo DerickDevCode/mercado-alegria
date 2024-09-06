@@ -1,9 +1,8 @@
 from django.urls import path
 
-
-from mercado.base.views import home, cadastro, perfil, editar_perfil, quem_somos_nos, politica_de_privacidade, politica_de_entrega, \
-    trocas_e_devolucoes, politicas_de_cancelamentos_e_ressarcimentos, politica_de_venda_precos_ofertas_e_promocoes, \
-    central_de_atendimento
+from mercado.base.views import home, cadastro, perfil, editar_perfil, quem_somos_nos, politica_de_privacidade, \
+    politica_de_entrega, trocas_e_devolucoes, politicas_de_cancelamentos_e_ressarcimentos, \
+    politica_de_venda_precos_ofertas_e_promocoes, central_de_atendimento
 
 app_name = 'base'
 urlpatterns = [

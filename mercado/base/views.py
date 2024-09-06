@@ -47,8 +47,8 @@ def editar_perfil(request):
             return redirect('/')
         else:
             return render(request, 'base/editar_perfil.html', context={'form': form})
-          
-          
+
+
 def quem_somos_nos(request):
     return render(request, 'base/quem_somos_nos.html')
 
