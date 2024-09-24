@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
+from mercado.base.api_mercado_pago import gerar_link_de_pagamento
 from mercado.produtos import facade
 from mercado.produtos.carrinho import calcular_total_itens, obter_carrinho_e_itens, \
     adicionar_produto_ao_carrinho, remover_produto_do_carrinho, excluir_produto_do_carrinho
@@ -55,8 +56,10 @@ def pagina_de_pesquisa(request):
 def pagina_do_carrinho(request):
     carrinho, carrinhoitens = obter_carrinho_e_itens(request)
     total = calcular_total_itens(carrinhoitens)
+    link_de_compra = gerar_link_de_pagamento()
     return render(request, 'produtos/carrinho.html',
-                  context={'carrinho': carrinho, 'carrinhoitens': carrinhoitens, 'total': total})
+                  context={'carrinho': carrinho, 'carrinhoitens': carrinhoitens, 'total': total,
+                           'link_de_compra': link_de_compra})
 
 
 def adicionar_ao_carrinho(request, produto_id: int):
