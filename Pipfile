@@ -15,6 +15,7 @@ django-extensions = "*"
 sentry-sdk = "*"
 django-debug-toolbar = "*"
 pillow = "*"
+mercadopago = "*"
 
 [dev-packages]
 flake8 = "*"
