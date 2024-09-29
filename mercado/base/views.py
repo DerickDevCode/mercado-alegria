@@ -75,3 +75,11 @@ def politica_de_venda_precos_ofertas_e_promocoes(request):
 
 def central_de_atendimento(request):
     return render(request, 'base/central_de_atendimento.html')
+
+
+def pagamento_sucesso(request):
+    return render(request, 'base/pagamento_sucesso.html')
+
+
+def pagamento_falha(request):
+    return render(request, 'base/pagamento_falha.html')
