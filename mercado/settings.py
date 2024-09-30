@@ -205,3 +205,6 @@ DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
 
 # Configurações Mercado Pago
 TOKEN_MERCADO_PAGO = config('TOKEN_MERCADO_PAGO')
+
+# Armazena a URL padrão do site
+BASE_URL_COMERCIAL_ALEGRIA = config('BASE_URL_COMERCIAL_ALEGRIA')
