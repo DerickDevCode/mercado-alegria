@@ -1,22 +1,28 @@
-# SDK do Mercado Pago
 import django
 import mercadopago
 import os
 
+from mercado.produtos.carrinho import Carrinho
+
 os.environ['DJANGO_SETTINGS_MODULE'] = 'mercado.settings'
 django.setup()
 
-from mercado.produtos import facade
-from mercado.settings import TOKEN_MERCADO_PAGO, BASE_URL_COMERCIAL_ALEGRIA
+from mercado.produtos import facade  # noqa
+from mercado.settings import TOKEN_MERCADO_PAGO, BASE_URL_COMERCIAL_ALEGRIA  # noqa
 
 
 def obter_info_itens_para_pagamento(request):
-    carrinho = facade.buscar_carrinho_existente(request)
-    itens_carrinho = facade.listar_itens_do_carrinho(carrinho)
+    if request.user.is_authenticated:
+        carrinho = facade.buscar_carrinho_existente(request)
+        itens_carrinho = facade.listar_itens_do_carrinho(carrinho)
+    else:
+        carrinho = Carrinho(request)
+        itens_carrinho = carrinho.get_products()
     items_detail = []
     for item in itens_carrinho:
         items_detail.append({'id': item.produto.id, 'title': item.produto.nome, 'picture_url': item.produto.imagem.url,
-                             'quantity': item.quantidade, 'currency_id': 'BRL', 'unit_price': item.produto.preco})
+                             'quantity': item.quantidade, 'currency_id': 'BRL',
+                             'unit_price': float(item.produto.preco)})
     return items_detail
 
 
@@ -36,4 +42,8 @@ def gerar_link_de_pagamento(request):
 
     preference_response = sdk.preference().create(preference_data)
     preference = preference_response["response"]
-    return preference['init_point']
+    try:
+        result = preference['init_point']
+        return result
+    except KeyError:
+        pass
