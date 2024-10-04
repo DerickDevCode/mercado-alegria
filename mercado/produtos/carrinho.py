@@ -89,7 +89,7 @@ def adicionar_produto_ao_carrinho(request, produto_id):
         produto = Produto.objects.get(id=produto_id)
 
         try:
-            item = facade.buscar_item_do_carrinho(produto)
+            item = facade.buscar_item_do_carrinho(produto, carrinho)
             item.quantidade += 1
             item.save()
         except Exception:
@@ -108,7 +108,7 @@ def remover_produto_do_carrinho(request, produto_id):
         carrinho = facade.buscar_carrinho_existente(request)
         produto = Produto.objects.get(id=produto_id)
         try:
-            item = facade.buscar_item_do_carrinho(produto)
+            item = facade.buscar_item_do_carrinho(produto, carrinho)
             item.quantidade -= 1
             item.save()
             if item.quantidade <= 0:
@@ -128,7 +128,7 @@ def excluir_produto_do_carrinho(request, produto_id):
         carrinho = facade.buscar_carrinho_existente(request)
         produto = Produto.objects.get(id=produto_id)
         try:
-            item = facade.buscar_item_do_carrinho(produto)
+            item = facade.buscar_item_do_carrinho(produto, carrinho)
             item.delete()
         except Exception:
             pass

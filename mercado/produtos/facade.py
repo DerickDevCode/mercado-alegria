@@ -96,13 +96,14 @@ def criar_carrinho(request):
     return Carrinho.objects.create(user=request.user)
 
 
-def buscar_item_do_carrinho(produto):
+def buscar_item_do_carrinho(produto, carrinho):
     """
-    Encontra o item do carrinho através do produto
+    Encontra o item do carrinho através do produto e do carrinho
     :param produto: recebe o produto a ser encontrado dentro do carrinho
+    :param carrinho: recebe o carrinho onde vai ser feita a busca pelo produto
     :return: retorna o item(produto) do carrinho
     """
-    return CarrinhoItem.objects.get(produto=produto)
+    return CarrinhoItem.objects.get(produto=produto, carrinho=carrinho)
 
 
 def listar_itens_do_carrinho(carrinho):
