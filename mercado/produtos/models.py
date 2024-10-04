@@ -82,6 +82,9 @@ class CarrinhoItem(models.Model):
     def total(self):
         return self.quantidade * self.produto.preco
 
+    def __str__(self):
+        return self.produto.nome
+
     class Meta:
         constraints = [
             UniqueConstraint(fields=['carrinho', 'produto'], name="unique_carrinho__produto")
