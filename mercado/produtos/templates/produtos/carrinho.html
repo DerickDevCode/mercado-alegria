@@ -67,10 +67,24 @@
                     <span>R${{ total }}</span>
                 </footer>
             </div>
+
+            {% if request.user.is_authenticated and carrinhoitens|length > 0 %}
             <a class="btn col-6" href="{{ link_de_compra }}"
                style="background: green; border: 0; color: white; display: block; width: 100%; padding: 15px; letter-spacing: 1px">
                 FINALIZAR COMPRA
             </a>
+            {% elif not request.user.is_authenticated and carrinhoitens|length > 0 %}
+            <a class="btn col-6" href="{% url 'base:cadastro' %}"
+               style="background: green; border: 0; color: white; display: block; width: 100%; padding: 15px; letter-spacing: 1px">
+                CADASTRE-SE PARA CONCLUIR A COMPRA
+            </a>
+            {% else %}
+            <a class="btn col-6" href="{% url 'base:home' %}"
+               style="background: green; border: 0; color: white; display: block; width: 100%; padding: 15px; letter-spacing: 1px">
+                ADICIONE UM PRODUTO AO CARRINHO
+            </a>
+            {% endif %}
+
         </div>
     </div>
 </div>
