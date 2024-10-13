@@ -2,21 +2,29 @@
 
 <p align="center">
  <a href="#tech">Tecnologias</a> • 
- <a href="#started">Introdução</a> • 
+ <a href="#introduction">Introdução</a> • 
+ <a href="#starting">Iniciando</a> •
+ <a href="#frontend">Front-end</a>
 </p>
 
 <p align="left">
     <b>Este é um projeto de E-commerce para um pequeno comércio local criado para colocar em prática conhecimentos e conceitos de programação com Django e python.</b>
 </p>
 
-<h2 id="technologies">💻 Tecnologias</h2>
+<h2 id="tech">💻 Tecnologias</h2>
 
 - Python
 - Django
+- Git
+- GitHub Actions
+- Flake8
 - Pipenv
 - Docker
+- PostgreSQL
+- Pytest
+- Bootstrap
 
-<h2 id="started">🚀 Como começar</h2>
+<h2 id="introduction">🚀 Como começar</h2>
 
 <h3>Pré-requisitos:</h3>
 
@@ -40,22 +48,22 @@ Use o arquivo `env-sample` como referência para criar o seu arquivo `.env` cont
 DEBUG = False
 SECRET_KEY = defina sua chave secreta
 
-# Substituir pelos valores corretos de acordo com o arquivo docker-compose.yml
+  # Substituir pelos valores corretos de acordo com o arquivo docker-compose.yml
 DATABASE_URL = postgres://postgres:postgres@localhost/testdb
 
 ALLOWED_HOSTS = localhost, 127.0.0.1
 SENTRY_DSN=
 INTERNAL_IPS=127.0.0.1
 
-# Armazena a URL padrão do site
+  # Armazena a URL padrão do site
 BASE_URL_COMERCIAL_ALEGRIA=127.0.0.1:8000
 
-# Configurações do AWS
+  # Configurações do AWS
 AWS_ACCESS_KEY_ID =
 AWS_SECRET_ACCESS_KEY =
 AWS_STORAGE_BUCKET_NAME =
 
-# configurações de Email, você deve configurar as variáveis do seu smtp de email aqui
+  # configurações de Email, você deve configurar as variáveis do seu smtp de email aqui
 EMAIL_BACKEND=django.core.mail.backends.console.EmailBackend
 EMAIL_HOST=localhost
 EMAIL_PORT=25
@@ -64,11 +72,11 @@ EMAIL_HOST_PASSWORD=
 EMAIL_USE_TLS=True
 DEFAULT_FROM_EMAIL=example@gmail.com
 
-# Credenciais mercado pago, você deve configurar o seu token do mercado pago aqui
+  # Credenciais mercado pago, você deve configurar o seu token do mercado pago aqui
 TOKEN_MERCADO_PAGO=token_de_credenciais_do_mercado_pago
 ```
 
-<h3>Iniciando</h3>
+<h3 id="starting">Iniciando:</h3>
 
 Comandos para iniciar o projeto
 
@@ -116,4 +124,61 @@ python manage.py collectstatic
 # Executa o servidor de desenvolvimento local.
 python manage.py runserver
 ```
+
 Agora você já tem o projeto rodando em seu ambiente local.
+
+<h2 id="frontend">🎨 Conhecendo o Projeto</h2>
+
+Conheça o visual e as funcionalidades do site para ter uma melhor experiência.
+
+Esta é a página inicial onde iremos começar:
+![site-home.png](mercado%2Fbase%2Fstatic%2Fimg%2Fsite-home.png)
+
+<h3>Como navegar pelo site?</h3>
+
+Algumas funcionalidades são acessíveis apenas para usuários logados, para isso você precisa fazer o cadastro e criar sua
+conta. Por enquanto, vejamos as funcionalidades disponíveis a todos os usuários.
+
+Ao navegar um pouco para baixo você verá os produtos disponíveis para compra. Clicando neles será redirecionado para uma
+página com mais detalhes:
+![site-produto-detalhe.png](mercado%2Fbase%2Fstatic%2Fimg%2Fsite-produto-detalhe.png)
+
+Aqui você verá várias informações sobre o produto, também poderá ser direcionado a uma página com produtos filtrados de
+acordo com a marca ao clicar na marca do produto indicada pela seta a direita, assim como uma página de produtos
+filtrada pelo departamento, categoria ou subcategoria, indicado pela seta a esquerda.
+
+<h3>Carrinho de compras</h3>
+
+Observe que no canto superior direito há um ícone de carrinho de compras, é lá que você deve adicionar seus produtos
+para finalizar sua compra. Você pode adicionar produtos ao carrinho pela página de detalhes do produto mostrada acima ou
+nos cards de produtos das outras páginas de exibição.
+
+Esta é a página do seu carrinho de compras, aqui serão exibidos os seus produtos do carrinho e as informações de
+quantidades e valores:
+![site-carrinho.png](mercado%2Fbase%2Fstatic%2Fimg%2Fsite-carrinho.png)
+
+Como você deve ter notado, para efetivamente concluir sua compra, deve realizar o cadastro no site e logar na sua conta.
+
+<h3>Cadastro e funcionalidades restritas</h3>
+
+Como havia dito anteriormente, algumas funcionalidades estão disponíveis apenas para usuários logados, e a finalização
+da compra é uma delas. Para realizar o cadastro, clique no ícone "Conecte-se" ao lado do carrinho de compras que você
+conheceu anteriormente, ele irá abrir um menu com as opções de login e cadastro.
+
+Na página de cadastro, preencha as informações e crie sua conta, você será logado automaticamente após se cadastrar.
+![site-cadastro.png](mercado%2Fbase%2Fstatic%2Fimg%2Fsite-cadastro.png)
+
+Caso já possua uma conta, faça login na página de login:
+![site-login.png](mercado%2Fbase%2Fstatic%2Fimg%2Fsite-login.png)
+
+Agora com um usuário logado, você terá acesso ao perfil de usuário.
+![site-perfil.png](mercado%2Fbase%2Fstatic%2Fimg%2Fsite-perfil.png)
+
+Nele você pode editar o seu perfil, alterar sua senha e também adicionar e ver seus Favoritos. Para adicionar um produto
+aos favoritos você deve clicar no ícone de coração que se localiza no canto superior direito dos cards de produtos, para
+remover é só clicar novamente.
+
+Agora que você está logado poderá finalizar sua compra. Clique no botão "Finalizar compra" na sua página do carrinho,
+você será redirecionado para a página de pagamentos do Mercado Pago.
+
+Agora você conheceu as principais funcionalidades do site, sinta-se livre para fazer suas compras!
