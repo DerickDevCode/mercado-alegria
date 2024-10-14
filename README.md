@@ -109,7 +109,7 @@ sudo apt install -y docker-ce
 
 ```bash
 # Sobe o banco de dados através do Docker.
-docker-compose up
+docker-compose up -d
 ```
 
 ```bash
