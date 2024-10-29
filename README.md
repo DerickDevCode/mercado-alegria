@@ -55,6 +55,11 @@ ALLOWED_HOSTS = localhost, 127.0.0.1
 SENTRY_DSN=
 INTERNAL_IPS=127.0.0.1
 
+# Variáveis do docker-compose
+POSTGRES_PASSWORD=
+POSTGRES_USER=
+POSTGRES_DB=
+
   # Armazena a URL padrão do site
 BASE_URL_COMERCIAL_ALEGRIA=127.0.0.1:8000
 
