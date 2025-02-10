@@ -41,6 +41,10 @@ jobs:
       - name: Rodar o flake8
         run: pipenv run flake8
 
+      - name: Rodar os testes
+        run: pipenv run pytest --cov=pypro
+
+
   deploy:
     name: Deploy
     runs-on: ubuntu-latest

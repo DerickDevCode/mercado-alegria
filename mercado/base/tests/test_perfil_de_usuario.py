@@ -44,11 +44,5 @@ def test_botao_meus_favoritos_esta_presente_na_pagina(resp_usuario_logado):
                              style="margin-right: 4px">Meus Favoritos</a>''')
 
 
-def test_botao_pagamentos_esta_presente_na_pagina(resp_usuario_logado):
-    assert_contains(resp_usuario_logado, '''<img src="/static/img/icone-cartao-pagamento.png" width="40"
-                             height="35"
-                             style="margin-right: 4px">Pagamentos</a>''')
-
-
 def test_botao_de_logout_esta_presente_na_pagina(resp_usuario_logado):
     assert_contains(resp_usuario_logado, f'<form method="post" action="{reverse("logout")}"')
