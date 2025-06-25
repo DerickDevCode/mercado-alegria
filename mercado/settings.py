@@ -152,15 +152,15 @@ AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
 if AWS_ACCESS_KEY_ID:
     # Static Assets
     # --------------------------------------------------------------------------------
-    STATIC_S3_PATH = config('STATIC_S3_PATH')
-    STATIC_ROOT = config('STATIC_ROOT')
-    STATIC_URL = config('STATIC_URL')
+    STATIC_S3_PATH = 'static'
+    STATIC_ROOT = f'/{STATIC_S3_PATH}/'
+    STATIC_URL = f'//{config("AWS_STORAGE_BUCKET_NAME")}.s3.sa-east-1.amazonaws.com//{STATIC_S3_PATH}/'
 
     # Upload Media Folder
     # --------------------------------------------------------------------------------
-    DEFAULT_S3_PATH = config('DEFAULT_S3_PATH')
-    MEDIA_ROOT = config('MEDIA_ROOT')
-    MEDIA_URL = config('MEDIA_URL')
+    DEFAULT_S3_PATH = 'media'
+    MEDIA_ROOT = f'/{DEFAULT_S3_PATH}/'
+    MEDIA_URL = f'//{config("AWS_STORAGE_BUCKET_NAME")}.s3.sa-east-1.amazonaws.com//{DEFAULT_S3_PATH}/'
 
     STORAGES = {
         "default": {
