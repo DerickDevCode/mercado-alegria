@@ -23,11 +23,11 @@ def test_home_link(resp):
 
 
 def test_favicon(resp):
-    assert_contains(resp, 'href="/static/img/favicon.png"')
+    assert_contains(resp, 'href="/static/img/favicon.webp"')
 
 
 def test_logo_rodape(resp):
-    assert_contains(resp, 'src="/static/img/banner.png"')
+    assert_contains(resp, 'src="/static/img/banner.webp"')
 
 
 @pytest.fixture

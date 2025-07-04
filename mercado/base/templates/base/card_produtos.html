@@ -4,13 +4,13 @@
         {% if produto in PRODUTOS_FAVORITOS %}
         <a class="" style="text-align: right"
            href="{% url 'produtos:remover_dos_favoritos' produto_id=produto.id %}">
-            <img src="{% static 'img/icone-coracao-preenchido.png' %}" class="card-img-top"
+            <img src="{% static 'img/icone-coracao-preenchido.webp' %}" class="card-img-top"
                  style="object-fit: contain; width: 48px; padding: 4px;" alt="teste">
         </a>
         {% else %}
         <a class="" style="text-align: right"
            href="{% url 'produtos:adicionar_aos_favoritos' produto_id=produto.id %}">
-            <img src="{% static 'img/icone-coracao.png' %}" class="card-img-top"
+            <img src="{% static 'img/icone-coracao.webp' %}" class="card-img-top"
                  style="object-fit: contain; width: 48px; padding: 4px;" alt="teste">
         </a>
         {% endif %}

@@ -24,7 +24,7 @@ def subcategoria(categoria):
 @pytest.fixture
 def produto(subcategoria):
     return baker.make(Produto, subcategoria=subcategoria, preco=20.75, descricao='texto aleatório para testes',
-                      imagem='mediafiles/imagens_produtos/arroz-bernardo.jpg')
+                      imagem='mediafiles/imagens_produtos/arroz-bernardo.webp')
 
 
 @pytest.fixture
@@ -56,7 +56,3 @@ def test_preco_produto(resp, produto):
 def test_link_do_produto_na_imagem_e_nome(resp, produto):
     assert_contains(resp, f'<a class="text-decoration-none ratio ratio-1x1" href="{produto.get_absolute_url()}">')
     assert_contains(resp, f'<a class="text-decoration-none" href="{produto.get_absolute_url()}">')
-
-# Adicionar esse teste quando a funcionalidade do carrinho for implementada.
-# def test_botao_de_adicionar_o_produto_ao_carrinho(resp):
-#     pass
