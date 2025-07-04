@@ -133,8 +133,8 @@ USE_I18N = True
 
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.0/howto/static-files/
+# CONFIGURAÇÃO DE ESTÁTICOS NO AMBIENTE DE DESENVOLVIMENTO
+# --------------------------------------------------------------------------------
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
@@ -150,35 +150,51 @@ COLLECTFAST_ENABLED = False
 AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
 
 if AWS_ACCESS_KEY_ID:
-    AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
-    AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
-    AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400', }
-    AWS_PRELOAD_METADATA = True
-    AWS_AUTO_CREATE_BUCKET = False
-    AWS_QUERYSTRING_AUTH = True
-    AWS_S3_CUSTOM_DOMAIN = None
-    AWS_DEFAULT_ACL = 'private'
-    COLLECTFAST_STRATEGY = "collectfast.strategies.boto3.Boto3Strategy"
-    COLLECTFAST_ENABLED = True
-
     # Static Assets
     # --------------------------------------------------------------------------------
-    STATICFILES_STORAGE = 's3_folder_storage.s3.StaticStorage'
     STATIC_S3_PATH = 'static'
     STATIC_ROOT = f'/{STATIC_S3_PATH}/'
-    STATIC_URL = f'//{AWS_STORAGE_BUCKET_NAME}.s3.sa-east-1.amazonaws.com//{STATIC_S3_PATH}/'
-    ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
+    STATIC_URL = f'//{config("AWS_STORAGE_BUCKET_NAME")}.s3.sa-east-1.amazonaws.com//{STATIC_S3_PATH}/'
 
     # Upload Media Folder
     # --------------------------------------------------------------------------------
-    DEFAULT_FILE_STORAGE = 's3_folder_storage.s3.DefaultStorage'
     DEFAULT_S3_PATH = 'media'
     MEDIA_ROOT = f'/{DEFAULT_S3_PATH}/'
-    MEDIA_URL = f'//{AWS_STORAGE_BUCKET_NAME}.s3.sa-east-1.amazonaws.com//{DEFAULT_S3_PATH}/'
+    MEDIA_URL = f'//{config("AWS_STORAGE_BUCKET_NAME")}.s3.sa-east-1.amazonaws.com//{DEFAULT_S3_PATH}/'
 
-    INSTALLED_APPS.append('s3_folder_storage')
+    STORAGES = {
+        "default": {
+            "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+            "OPTIONS": {
+                "access_key": config('AWS_ACCESS_KEY_ID'),
+                "secret_key": config('AWS_SECRET_ACCESS_KEY'),
+                "bucket_name": config('AWS_STORAGE_BUCKET_NAME'),
+                "default_acl": 'private',
+                "object_parameters": {'CacheControl': 'max-age=86400', },
+                "location": DEFAULT_S3_PATH,
+            },
+        },
+        "staticfiles": {
+            "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+            "OPTIONS": {
+                "access_key": config('AWS_ACCESS_KEY_ID'),
+                "secret_key": config('AWS_SECRET_ACCESS_KEY'),
+                "bucket_name": config('AWS_STORAGE_BUCKET_NAME'),
+                "default_acl": 'private',
+                "object_parameters": {'CacheControl': 'max-age=86400', },
+                "location": STATIC_S3_PATH,
+            },
+        },
+    }
+
+    COLLECTFAST_STRATEGY = "collectfast.strategies.boto3.Boto3Strategy"
+    COLLECTFAST_ENABLED = True
+    AWS_PRELOAD_METADATA = True
+    AWS_AUTO_CREATE_BUCKET = False
+
     INSTALLED_APPS.append('storages')
 
+# Configurações do Sentry
 SENTRY_DSN = config('SENTRY_DSN', default=None)
 
 if SENTRY_DSN:

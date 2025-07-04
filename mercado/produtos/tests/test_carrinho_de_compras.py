@@ -24,13 +24,13 @@ def subcategoria(categoria):
 @pytest.fixture
 def produto1(subcategoria):
     return baker.make(Produto, subcategoria=subcategoria, preco=10.50, descricao='texto aleatório para testes',
-                      imagem='mediafiles/imagens_produtos/arroz-bernardo.jpg')
+                      imagem='mediafiles/imagens_produtos/arroz-bernardo.webp')
 
 
 @pytest.fixture
 def produto2(subcategoria):
     return baker.make(Produto, subcategoria=subcategoria, preco=20.50, descricao='texto aleatório para testes',
-                      imagem='mediafiles/imagens_produtos/arroz-bernardo.jpg')
+                      imagem='mediafiles/imagens_produtos/arroz-bernardo.webp')
 
 
 @pytest.fixture
