@@ -137,7 +137,7 @@ Agora você já tem o projeto rodando em seu ambiente local.
 Conheça o visual e as funcionalidades do site para ter uma melhor experiência.
 
 Esta é a página inicial onde iremos começar:
-![site-home.png](mercado%2Fbase%2Fstatic%2Fimg%2Fsite-home.png)
+![site-home.webp](mercado%2Fbase%2Fstatic%2Fimg%2Fsite-home.webp)
 
 <h3>Como navegar pelo site?</h3>
 
@@ -146,7 +146,7 @@ conta. Por enquanto, vejamos as funcionalidades disponíveis a todos os usuário
 
 Ao navegar um pouco para baixo você verá os produtos disponíveis para compra. Clicando neles será redirecionado para uma
 página com mais detalhes:
-![site-produto-detalhe.png](mercado%2Fbase%2Fstatic%2Fimg%2Fsite-produto-detalhe.png)
+![site-produto-detalhe.webp](mercado%2Fbase%2Fstatic%2Fimg%2Fsite-produto-detalhe.webp)
 
 Aqui você verá várias informações sobre o produto, também poderá ser direcionado a uma página com produtos filtrados de
 acordo com a marca ao clicar na marca do produto indicada pela seta a direita, assim como uma página de produtos
@@ -160,7 +160,7 @@ nos cards de produtos das outras páginas de exibição.
 
 Esta é a página do seu carrinho de compras, aqui serão exibidos os seus produtos do carrinho e as informações de
 quantidades e valores:
-![site-carrinho.png](mercado%2Fbase%2Fstatic%2Fimg%2Fsite-carrinho.png)
+![site-carrinho.webp](mercado%2Fbase%2Fstatic%2Fimg%2Fsite-carrinho.webp)
 
 Como você deve ter notado, para efetivamente concluir sua compra, deve realizar o cadastro no site e logar na sua conta.
 
@@ -171,13 +171,13 @@ da compra é uma delas. Para realizar o cadastro, clique no ícone "Conecte-se" 
 conheceu anteriormente, ele irá abrir um menu com as opções de login e cadastro.
 
 Na página de cadastro, preencha as informações e crie sua conta, você será logado automaticamente após se cadastrar.
-![site-cadastro.png](mercado%2Fbase%2Fstatic%2Fimg%2Fsite-cadastro.png)
+![site-cadastro.webp](mercado%2Fbase%2Fstatic%2Fimg%2Fsite-cadastro.webp)
 
 Caso já possua uma conta, faça login na página de login:
-![site-login.png](mercado%2Fbase%2Fstatic%2Fimg%2Fsite-login.png)
+![site-login.webp](mercado%2Fbase%2Fstatic%2Fimg%2Fsite-login.webp)
 
 Agora com um usuário logado, você terá acesso ao perfil de usuário.
-![site-perfil.png](mercado%2Fbase%2Fstatic%2Fimg%2Fsite-perfil.png)
+![site-perfil.webp](mercado%2Fbase%2Fstatic%2Fimg%2Fsite-perfil.webp)
 
 Nele você pode editar o seu perfil, alterar sua senha e também adicionar e ver seus Favoritos. Para adicionar um produto
 aos favoritos você deve clicar no ícone de coração que se localiza no canto superior direito dos cards de produtos, para

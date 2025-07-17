@@ -56,7 +56,7 @@ def buscar_carrinho_existente(request):
     :param request: recebe o request
     :return: retorna o carrinho do usuário
     """
-    return Carrinho.objects.get(user=request.user)
+    return Carrinho.objects.filter(user=request.user).first()
 
 
 def criar_carrinho(request):
@@ -84,7 +84,8 @@ def listar_itens_do_carrinho(carrinho):
     :param carrinho: recebe o carrinho do usuário
     :return: retorna uma lista com todos os itens do carrinho
     """
-    return CarrinhoItem.objects.filter(carrinho=carrinho).order_by('produto')
+    return CarrinhoItem.objects.filter(carrinho=carrinho).select_related(
+        'produto__subcategoria__categoria__departamento').order_by('produto')
 
 
 def buscar_favoritos_existente(request):
@@ -111,7 +112,8 @@ def listar_itens_dos_favoritos(favoritos):
     :param favoritos: recebe o favorito do usuário
     :return: retorna uma lista com todos os itens dos favoritos
     """
-    return ItemFavoritos.objects.filter(favoritos=favoritos).order_by('produto')
+    return ItemFavoritos.objects.filter(favoritos=favoritos).select_related(
+        'produto__subcategoria__categoria__departamento').order_by('produto')
 
 
 def buscar_item_dos_favoritos(produto):

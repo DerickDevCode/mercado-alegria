@@ -68,9 +68,8 @@ def calcular_total_itens(itens):
 
 def obter_carrinho_e_itens(request):
     if request.user.is_authenticated:
-        try:
-            carrinho = facade.buscar_carrinho_existente(request)
-        except Exception:
+        carrinho = facade.buscar_carrinho_existente(request)
+        if not carrinho:
             carrinho = facade.criar_carrinho(request)
         carrinhoitens = facade.listar_itens_do_carrinho(carrinho)
     else:
@@ -81,9 +80,8 @@ def obter_carrinho_e_itens(request):
 
 def adicionar_produto_ao_carrinho(request, produto_id):
     if request.user.is_authenticated:
-        try:
-            carrinho = facade.buscar_carrinho_existente(request)
-        except Exception:
+        carrinho = facade.buscar_carrinho_existente(request)
+        if not carrinho:
             carrinho = facade.criar_carrinho(request)
 
         produto = Produto.objects.get(id=produto_id)
