@@ -5,10 +5,22 @@ from django.shortcuts import render, redirect
 
 from mercado.base.forms import UserForm
 from mercado.base.models import User
+from mercado.base.tests.test_cards_de_produtos import produtos
+from mercado.produtos import facade
 
 
 def home(request):
-    return render(request, 'base/home.html')
+    if request.user.is_authenticated:
+        try:
+            favoritos = facade.buscar_favoritos_existente(request)
+        except Exception:
+            favoritos = facade.criar_favoritos(request)
+
+        produtos = [objeto.produto for objeto in facade.listar_itens_dos_favoritos(favoritos)]
+    else:
+        produtos = []
+
+    return render(request, 'base/home.html', context={'produtos': produtos})
 
 
 def cadastro(request):

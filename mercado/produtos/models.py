@@ -65,7 +65,7 @@ class Departamento(models.Model):
 
 
 class Carrinho(models.Model):
-    user = models.ForeignKey(get_user_model(), on_delete=CASCADE)
+    user = models.OneToOneField(get_user_model(), on_delete=CASCADE)
     produtos = models.ManyToManyField(Produto, through='CarrinhoItem')
 
     def __str__(self):

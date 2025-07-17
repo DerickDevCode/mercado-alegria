@@ -1,7 +1,7 @@
 {% load static %}
 <div class="col-md-2 my-2">
     <div class="card border-0 text-center" style="box-shadow: 0 0 5px rgba(0, 0, 0, 0.3)">
-        {% if produto in PRODUTOS_FAVORITOS %}
+        {% if produto in produtos %}
         <a class="" style="text-align: right"
            href="{% url 'produtos:remover_dos_favoritos' produto_id=produto.id %}">
             <img src="{% static 'img/icone-coracao-preenchido.webp' %}" class="card-img-top"
