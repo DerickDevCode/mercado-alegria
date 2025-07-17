@@ -5,7 +5,6 @@ from django.shortcuts import render, redirect
 
 from mercado.base.forms import UserForm
 from mercado.base.models import User
-from mercado.base.tests.test_cards_de_produtos import produtos
 from mercado.produtos import facade
 
 

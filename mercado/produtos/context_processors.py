@@ -1,4 +1,3 @@
-from mercado.produtos import facade
 from mercado.produtos.models import Produto, Departamento
 
 
